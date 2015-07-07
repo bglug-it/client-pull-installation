@@ -2,6 +2,5 @@
 
 - hosts: localhost
   user: root
-  tasks:
-    - name: Test task
-      lineinfile: dest=/tmp/ansible-pull-test.log line=FUNZIONA state=present create=yes
+  roles:
+    - init
