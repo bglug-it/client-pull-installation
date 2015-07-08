@@ -21,5 +21,6 @@
     mode: 0440
     create: yes
     state: present
+    validate: "visudo -cf %s"
 
 # TODO: implementare download e installazione della chiave pubblica

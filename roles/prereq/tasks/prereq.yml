@@ -1,0 +1,11 @@
+---
+
+- name: Download impostazioni dominio
+  get_url:
+    url: "http://{{ ansible_facts.ansible_default_ipv4.gateway }}:3001/domain"
+    dest: /etc/domain.yml
+    owner: root
+    mode: 0644
+
+- name: Carico le variabili di dominio nel playbook per l'uso
+  include_vars: /etc/domain.yml
