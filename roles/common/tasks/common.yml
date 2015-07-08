@@ -16,6 +16,7 @@
   with_items:
     - edubuntu-desktop
     - ubuntu-edu-secondary
+  sudo: yes
 
 - name: Rimozione di pacchetti non richiesti
   apt: pkg={{ items }} state=absent purge=yes
@@ -24,3 +25,4 @@
     - zeitgeist-core
     - zeitgeist-datahub
     - epoptes
+  sudo: yes
