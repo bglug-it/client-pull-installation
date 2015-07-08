@@ -21,7 +21,7 @@
     mode: 0440
     create: yes
     state: present
-    validate: "visudo -c -f '%s'"
+    validate: '/usr/sbin/visudo -c -f %s'
 
 - name: Autorizzazione della chiave pubblica del server
   authorized_key:
