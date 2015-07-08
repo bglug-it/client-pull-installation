@@ -19,7 +19,7 @@
   sudo: yes
 
 - name: Rimozione di pacchetti non richiesti
-  apt: pkg={{ items }} state=absent purge=yes
+  apt: pkg={{ item }} state=absent purge=yes
   with_items:
     - unity-webapps-common
     - zeitgeist-core
