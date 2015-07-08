@@ -10,6 +10,7 @@
 
 - name: Aggiornamento pacchetti disponibili
   apt: update_cache=yes
+  sudo: yes
 
 - name: Installazione interfaccia grafica
   apt: pkg={{ item }} state=installed
