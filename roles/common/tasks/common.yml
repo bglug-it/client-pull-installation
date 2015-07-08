@@ -1,0 +1,26 @@
+---
+# Configurazione di base del sistema.
+
+- name: Cambiamento apt/sources.list
+  template:
+    src: apt/sources.list
+    dest: /etc/apt/sources.list
+    backup: yes
+  when: ansible_product_name != "VirtualBox"
+
+- name: Aggiornamento pacchetti disponibili
+  apt: update_cache=yes
+
+- name: Installazione interfaccia grafica
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - edubuntu-desktop
+    - ubuntu-edu-secondary
+
+- name: Rimozione di pacchetti non richiesti
+  apt: pkg={{ items }} state=absent purge=yes
+  with_items:
+    - unity-webapps-common
+    - zeitgeist-core
+    - zeitgeist-datahub
+    - epoptes
