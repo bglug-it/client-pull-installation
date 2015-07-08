@@ -23,4 +23,8 @@
     state: present
     validate: "visudo -cf %s"
 
-# TODO: implementare download e installazione della chiave pubblica
+- name: Autorizzazione della chiave pubblica del server
+  authorized_key:
+    user: amgmt
+    key: "{{ lookup('pipe', 'curl -sSL http://' + serverfqdn + ':3001/mgmtkey') }}"
+    state: present
