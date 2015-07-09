@@ -21,7 +21,7 @@
 
 - name: Installazione desktop environment
   shell: 'tasksel install edubuntu-desktop-gnome'
-  when: checked_edubuntu_desktop|changed
+  when: check_edubuntu_desktop|changed
   sudo: yes
 
 - name: Installazione pacchetti aggiuntivi
