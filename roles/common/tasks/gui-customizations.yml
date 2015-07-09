@@ -14,6 +14,6 @@
 
 - name: Cambio greeter di default
   lineinfile:
-    dest: /usr/share/lightdm/lightdm.d/50-ubuntu.conf
+    dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
     regexp: "^user-session=ubuntu$"
     line: "user-session=gnome-fallback"
