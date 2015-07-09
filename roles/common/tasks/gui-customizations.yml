@@ -9,11 +9,18 @@
     - ^auto eth0
     - ^iface eth0
 
-- name: Riavvio servizio NetworkManager
-  service: name=network-manager state=restarted
-
 - name: Cambio greeter di default
   lineinfile:
     dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
     regexp: "^user-session=ubuntu$"
     line: "user-session=gnome-fallback"
+
+- name: Altre impostazioni lightdm
+  lineinfile:
+    dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+    regexp: "{{ item }}"
+    line: "{{ item }}"
+  with_items:
+    - "allow-guest=false"
+    - "greeter-hide-users=true"
+    - "greeter-show-manual-login=true"

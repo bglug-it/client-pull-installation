@@ -1,0 +1,20 @@
+---
+
+- name: Disabilito la visualizzazione utenti in GNOME
+  copy:
+    src: com.canonical.indicator.session.gschema.override
+    dest: /usr/share/glib-2.0/schemas/com.canonical.indicator.session.gschema.override
+    backup: yes
+  register: cfg_glib_users
+
+- name: Attivo visibilità dei dischi montati sul desktop
+  copy:
+    src: org.gnome.nautilus.desktop.gschema.override
+    dest: /usr/share/glib-2.0/schemas/org.gnome.nautilus.desktop.gschema.override
+    backup: yes
+  register: cfg_glib_mounted
+
+- name: Ricompilo gli schemi glib2
+  shell: glib-compile-schemas --strict /usr/share/glib-2.0/schemas/
+  sudo: yes
+  when: cfg_glib_users|changed or cfg_glib_mounted|changed

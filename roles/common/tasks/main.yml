@@ -6,3 +6,8 @@
   tags:
     - common
     - gui-customizations
+
+- include: glib2.yml
+  tags:
+    - common
+    - glib2
