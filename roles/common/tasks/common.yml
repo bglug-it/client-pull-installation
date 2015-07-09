@@ -40,11 +40,14 @@
     - epoptes
   sudo: yes
 
-  #- name: Correggo NetworkManager per gestire la rete
-  #  lineinfile:
-  #    dest: /etc/NetworkManager/NetworkManager.conf
-  #    regexp: '^managed=false'
-  #    line: 'managed=true'
-  #    state: present
+- name: Correggo NetworkManager per gestire la rete
+  lineinfile:
+    dest: /etc/NetworkManager/NetworkManager.conf
+    regexp: "{{ item }}"
+    state: absent
+  with_items:
+    - "^auto eth0"
+    - "^iface eth0"
 
-# Configura networkmanager
+- name: Riavvio servizio NetworkManager
+  service: name=network-manager state=restarted
