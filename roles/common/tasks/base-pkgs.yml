@@ -31,6 +31,11 @@
     - epoptes-client
   sudo: yes
 
+- name: Aggiungo VirtualBox Guest Additions, se necessario
+  apt: pkg=virtualbox-guest-dkms state=present
+  when: ansible_product_name != "VirtualBox"
+  sudo: yes
+
 - name: Rimozione di pacchetti non richiesti
   apt: pkg={{ item }} state=absent purge=yes
   with_items:
