@@ -39,15 +39,3 @@
     - zeitgeist-datahub
     - epoptes
   sudo: yes
-
-- name: Correggo NetworkManager per gestire la rete
-  lineinfile:
-    dest: /etc/network/interfaces
-    regexp: "{{ item }}"
-    state: absent
-  with_items:
-    - ^auto eth0
-    - ^iface eth0
-
-- name: Riavvio servizio NetworkManager
-  service: name=network-manager state=restarted
