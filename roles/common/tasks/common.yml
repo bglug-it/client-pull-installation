@@ -12,8 +12,16 @@
   apt: update_cache=yes
   sudo: yes
 
+- name: Verifica desktop Edubuntu
+  shell: 'tasksel --list-tasks | grep "^i edubuntu-desktop-gnome"'
+  ignore_errors: yes
+  register: check_edubuntu_desktop
+  changed_when: check_edubuntu_desktop.rc != 0
+  sudo: yes
+
 - name: Installazione desktop environment
-  apt: pkg="edubuntu-desktop-gnome^" state=installed
+  shell: 'tasksel install edubuntu-desktop-gnome'
+  when: checked_edubuntu_desktop|changed
   sudo: yes
 
 - name: Installazione pacchetti aggiuntivi
