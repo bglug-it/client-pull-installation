@@ -33,7 +33,7 @@
 
 - name: Aggiungo VirtualBox Guest Additions, se necessario
   apt: pkg=virtualbox-guest-dkms state=present
-  when: ansible_product_name != "VirtualBox"
+  when: ansible_product_name == "VirtualBox"
   sudo: yes
 
 - name: Rimozione di pacchetti non richiesti
