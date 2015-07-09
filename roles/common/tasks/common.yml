@@ -42,7 +42,7 @@
 
 - name: Correggo NetworkManager per gestire la rete
   lineinfile:
-    dest: /etc/NetworkManager/NetworkManager.conf
+    dest: /etc/network/interfaces
     regexp: "{{ item }}"
     state: absent
   with_items:
