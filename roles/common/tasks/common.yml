@@ -12,11 +12,15 @@
   apt: update_cache=yes
   sudo: yes
 
-- name: Installazione interfaccia grafica
+- name: Installazione desktop environment
+  apt: pkg="edubuntu-desktop^" state=installed
+  sudo: yes
+
+- name: Installazione pacchetti aggiuntivi
   apt: pkg={{ item }} state=installed
   with_items:
-    - edubuntu-desktop
     - ubuntu-edu-secondary
+    - epoptes-client
   sudo: yes
 
 - name: Rimozione di pacchetti non richiesti
@@ -27,3 +31,12 @@
     - zeitgeist-datahub
     - epoptes
   sudo: yes
+
+  #- name: Correggo NetworkManager per gestire la rete
+  #  lineinfile:
+  #    dest: /etc/NetworkManager/NetworkManager.conf
+  #    regexp: '^managed=false'
+  #    line: 'managed=true'
+  #    state: present
+
+# Configura networkmanager
