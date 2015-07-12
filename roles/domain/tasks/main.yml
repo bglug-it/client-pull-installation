@@ -2,12 +2,17 @@
 # Configurazioni per messa in dominio.
 # Impostazioni grafiche da gestire in dominio
 
-- include: gui-changes.yml
-  tags:
-    - domain
-    - gui
-
 - include: ntp.yml
   tags:
     - domain
     - ntp
+
+- include: nss.yml
+  tags:
+    - domain
+    - nss
+
+- include: gui-changes.yml
+  tags:
+    - domain
+    - gui

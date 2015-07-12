@@ -1,0 +1,3 @@
+---
+- name: Configurazione nsswitch.conf 
+  template: src=nsswitch.conf dest=/etc/nsswitch.conf backup=yes owner=root group=root mode=0644
