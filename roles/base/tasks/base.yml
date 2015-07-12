@@ -27,6 +27,9 @@
 - name: Installazione pacchetti aggiuntivi
   apt: pkg={{ item }} state=installed
   with_items:
+    - vim
+    - screen
+    - cifs-utils
     - ubuntu-edu-secondary
     - epoptes-client
   sudo: yes

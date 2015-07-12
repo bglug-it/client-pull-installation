@@ -1,0 +1,19 @@
+---
+- name: Configurazione smb.conf
+  template: src=smb.conf dest=/etc/samba/smb.conf validate='testparm -s %s' backup=yes
+  sudo: yes
+  register: cfg_samba
+
+- name: Riavvio samba
+  shell: restart smbd
+  sudo: yes
+  when: cfg_samba|changed
+
+- name: Riavvio winbind
+  shell: restart winbind
+  sudo: yes
+  when: cfg_samba|changed
+
+- name: Creazione home base
+  file: path=/home/{{ domainshort }} owner=root group=root state=directory
+  sudo: yes

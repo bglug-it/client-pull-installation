@@ -1,0 +1,7 @@
+---
+- name: Installazione pacchetti necessari per dominio
+  apt: pkg={{ item }} state=present
+  sudo: yes
+  with_items:
+    - winbind
+    - samba

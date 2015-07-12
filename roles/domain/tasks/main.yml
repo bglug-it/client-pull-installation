@@ -16,3 +16,24 @@
   tags:
     - domain
     - gui
+
+- include: pkgs.yml
+  tags:
+    - domain
+    - pkgs
+
+- include: pam_base.yml
+  tags:
+    - domain
+    - pam
+
+- include: pam_mount.yml
+  tags:
+    - domain
+    - pam
+    - pam_mount
+
+- include: smb_config.yml
+  tags:
+    - domain
+    - smb
