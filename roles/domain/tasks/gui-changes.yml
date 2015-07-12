@@ -1,0 +1,8 @@
+---
+# Cambiamenti all'interfaccia grafica
+
+- include: lightdm.yml
+  tags: lightdm
+
+- include: glib2.yml
+  tags: glib2

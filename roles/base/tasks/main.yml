@@ -1,0 +1,9 @@
+---
+# Configurazioni di base.
+# Al termine delle configurazioni di base, avremo un'installazione
+# completa di Edubuntu.
+
+- include: base.yml
+  tags:
+    - base
+    - edubuntu

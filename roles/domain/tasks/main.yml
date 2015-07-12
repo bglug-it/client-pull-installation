@@ -1,0 +1,8 @@
+---
+# Configurazioni per messa in dominio.
+# Impostazioni grafiche da gestire in dominio
+
+- include: gui-changes.yml
+  tags:
+    - domain
+    - gui

@@ -1,0 +1,11 @@
+---
+
+- name: Altre impostazioni lightdm
+  lineinfile:
+    dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+    regexp: "{{ item }}"
+    line: "{{ item }}"
+  with_items:
+    - "allow-guest=false"
+    - "greeter-hide-users=true"
+    - "greeter-show-manual-login=true"
