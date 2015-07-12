@@ -1,0 +1,14 @@
+---
+- name: Installazione ntp
+  apt: name=ntp state=present
+  sudo: yes
+
+- name: Configurazione ntp
+  template: src=ntp.conf dest=/etc/ntp.conf backup=yes owner=root group=root mode=0644
+  sudo: yes
+  register: cfg_ntp
+
+- name: Riavvio ntp
+  service: name=ntp state=restarted
+  sudo: yes
+  when: cfg_ntp|changed

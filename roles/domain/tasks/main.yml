@@ -6,3 +6,8 @@
   tags:
     - domain
     - gui
+
+- include: ntp.yml
+  tags:
+    - domain
+    - ntp
