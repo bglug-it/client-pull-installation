@@ -37,3 +37,8 @@
   tags:
     - domain
     - smb
+
+- include: domain_join.yml
+  tags:
+    - domain
+    - join
