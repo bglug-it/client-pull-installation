@@ -2,7 +2,7 @@
 
 - name: Download impostazioni dominio
   get_url:
-    url: "http://{{ ansible_default_ipv4.gateway }}:3001/domain"
+    url: "http://{{ ansible_default_ipv4.gateway }}:3000/domain"
     dest: /etc/domain.yml
     owner: root
     mode: 0644

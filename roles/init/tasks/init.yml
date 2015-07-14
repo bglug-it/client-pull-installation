@@ -26,5 +26,5 @@
 - name: Autorizzazione della chiave pubblica del server
   authorized_key:
     user: amgmt
-    key: "{{ lookup('pipe', 'curl -sSL http://' + serverfqdn + ':3001/mgmtkey') }}"
+    key: "{{ lookup('pipe', 'curl -sSL http://' + serverfqdn + ':3000/mgmtkey') }}"
     state: present
