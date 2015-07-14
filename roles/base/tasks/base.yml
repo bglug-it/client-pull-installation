@@ -13,14 +13,14 @@
   sudo: yes
 
 - name: Verifica desktop Edubuntu
-  shell: 'tasksel --list-tasks | grep "^i edubuntu-desktop-gnome"'
+  shell: tasksel --list-tasks | grep "^i edubuntu-desktop-gnome"
   ignore_errors: yes
   register: check_edubuntu_desktop
   changed_when: check_edubuntu_desktop.rc != 0
   sudo: yes
 
 - name: Installazione desktop environment
-  shell: 'tasksel install edubuntu-desktop-gnome'
+  shell: tasksel install edubuntu-desktop-gnome
   when: check_edubuntu_desktop|changed
   sudo: yes
 
