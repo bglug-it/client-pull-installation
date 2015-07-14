@@ -11,6 +11,18 @@
     state: present
     generate_ssh_key: yes
 
+- name: Concessione diritti sudo all'utente root
+  lineinfile:
+    dest: /etc/sudoers.d/root
+    regexp: "^root.*NOPASSWD"
+    line: "root ALL=(ALL:ALL) NOPASSWD:ALL"
+    owner: root
+    group: root
+    mode: 0440
+    create: yes
+    state: present
+    validate: '/usr/sbin/visudo -c -f %s'
+
 - name: Concessione diritti sudo all'utente ansible
   lineinfile:
     dest: /etc/sudoers.d/amgmt
