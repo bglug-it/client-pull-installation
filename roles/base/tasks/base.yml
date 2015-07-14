@@ -13,7 +13,7 @@
   sudo: yes
 
 - name: Installazione desktop environment
-  apt: name=="edubuntu-desktop-gnome^" status=present
+  apt: name=="edubuntu-desktop-gnome^" state=present
   sudo: yes
 
 - name: Installazione pacchetti aggiuntivi
