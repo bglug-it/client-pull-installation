@@ -17,11 +17,13 @@
   ignore_errors: yes
   register: check_edubuntu_pkg
   changed_when: check_edubuntu_pkg.rc != 0
+  tags: edu-install
   sudo: yes
 
 - name: Installazione desktop environment
-  shell: tasksel install edubuntu-desktop-gnome
+  shell: "DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y install edubuntu-desktop-gnome^"
   when: check_edubuntu_pkg|changed
+  tags: edu-install
   sudo: yes
 
 - name: Installazione pacchetti aggiuntivi
@@ -32,6 +34,7 @@
     - cifs-utils
     - ubuntu-edu-secondary
     - epoptes-client
+  tags: edu-install
   sudo: yes
 
 - name: Aggiungo VirtualBox Guest Additions, se necessario
