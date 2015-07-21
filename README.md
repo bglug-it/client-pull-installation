@@ -1,6 +1,6 @@
 # Ansible-pull configuration playbook for domain clients #
 
-## Progetto Scuola - [<img src="https://avatars1.githubusercontent.com/u/12886037?v=3&s=200" width="25" height="25" alt="BgLUG logo" /> BgLUG][] - Scenary 1 ##
+## Progetto Scuola - [<img src="https://avatars1.githubusercontent.com/u/12886037?v=3&s=200" width="25" height="25" alt="BgLUG logo" /> BgLUG][bglug] - Scenary 1 ##
 
 Configurations for [Ubuntu][] client (or better, [Edubuntu][]) inside a
 [SAMBA][] 3.0 domain with [NethServer][].
