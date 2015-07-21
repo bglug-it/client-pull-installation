@@ -1,15 +1,15 @@
 # Ansible-pull configuration playbook for domain clients #
 
-## BgLUG - Progetto Scuola --- Scenary 1 ##
+## Progetto Scuola - [<img src="https://avatars1.githubusercontent.com/u/12886037?v=3&s=200" width="25" height="25" alt="BgLUG logo" /> BgLUG][] - Scenary 1 ##
 
-Configurations for Ubuntu client inside a SAMBA 3.0 domain with
-[NethServer](http://www.nethserver.org/).
+Configurations for [Ubuntu][] client (or better, [Edubuntu][]) inside a
+[SAMBA][] 3.0 domain with [NethServer][].
 
 The files in this repository has to be read and executed by `ansible-pull`
-from the client, right after the first installation via PXE and using custom
-kickstart files.
+(please check it out from [Ansible][]) from the client, right after the first
+installation via PXE and using custom kickstart files.
 
-## TODO ##
+## ToDo List ##
 
 * Better split of roles (the *domain* role is quite complex and
   heterogeneous)
@@ -17,3 +17,10 @@ kickstart files.
   pass further configuration variables with the help of
 [`doraemon`](https://github.com/bglug-it/doraemon))
 * Tasks/roles testing
+
+[bglug]: http://bglug.it "BgLUG Homepage"
+[ubuntu]: http://www.ubuntu.com
+[edubuntu]: http://www.edubuntu.com
+[nethserver]: http://www.nethserver.org
+[samba]: http://www.samba.org
+[ansible]: http://www.ansible.com
