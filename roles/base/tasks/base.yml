@@ -3,7 +3,7 @@
 
 - name: Cambiamento apt/sources.list
   template:
-    src: apt/sources.list
+    src: sources.list
     dest: /etc/apt/sources.list
     backup: yes
   when: ansible_product_name != "VirtualBox"
