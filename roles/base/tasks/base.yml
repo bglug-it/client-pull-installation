@@ -45,6 +45,7 @@
 - name: Rimozione di pacchetti non richiesti
   apt: pkg={{ item }} state=absent purge=yes
   with_items:
+    - libnss-mdns
     - unity-webapps-common
     - zeitgeist-core
     - zeitgeist-datahub
