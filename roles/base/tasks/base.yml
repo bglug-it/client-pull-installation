@@ -12,6 +12,10 @@
   apt: update_cache=yes
   sudo: yes
 
+- name: Aggiornamento sistema
+  apt: upgrade=full
+  sudo: yes
+
 - name: Verifica presenza desktop environment
   shell: 'tasksel --list-tasks | grep "^i edubuntu-desktop-gnome"'
   ignore_errors: yes
@@ -42,7 +46,7 @@
   when: ansible_product_name == "VirtualBox"
   sudo: yes
 
-- name: Rimozione di pacchetti non richiesti
+- name: Rimozione di pacchetti installati ma non richiesti
   apt: pkg={{ item }} state=absent purge=yes
   with_items:
     - libnss-mdns
@@ -50,6 +54,10 @@
     - zeitgeist-core
     - zeitgeist-datahub
     - epoptes
+  sudo: yes
+
+- name: Rimozione pacchetti non più necessari
+  shell: apt-get -y autoremove
   sudo: yes
 
 - name: Correggo NetworkManager per gestire la rete
