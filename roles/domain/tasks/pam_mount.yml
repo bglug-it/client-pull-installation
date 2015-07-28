@@ -9,24 +9,24 @@
   template: src=pam_mount.conf.xml dest=/etc/security/pam_mount.conf.xml backup=yes
   sudo: yes
 
-- name: Creazione directory di default per Condiviso
-  file: path=/etc/skel/Condiviso state=directory
-  sudo: yes
+  #- name: Creazione directory di default per Condiviso
+  #  file: path=/etc/skel/Condiviso state=directory
+  #  sudo: yes
 
-- name: 'common-auth: aggiunta pam_mount'
-  lineinfile:
-    dest: /etc/pam.d/common-auth
-    regexp: '^auth.*pam_mount\.so$'
-    insertafter: EOF
-    line: 'auth optional pam_mount.so'
-    state: present
-  sudo: yes
-
-- name: 'common-session: aggiunta pam_mount'
-  lineinfile:
-    dest: /etc/pam.d/common-session
-    regexp: '^session.*pam_mount\.so$'
-    insertafter: 'session.*pam_winbind\.so'
-    line: 'session optional pam_mount.so'
-    state: present
-  sudo: yes
+  #- name: 'common-auth: aggiunta pam_mount'
+  #  lineinfile:
+  #    dest: /etc/pam.d/common-auth
+  #    regexp: '^auth.*pam_mount\.so$'
+  #    insertafter: EOF
+  #    line: 'auth optional pam_mount.so'
+  #    state: present
+  #  sudo: yes
+  #
+  #- name: 'common-session: aggiunta pam_mount'
+  #  lineinfile:
+  #    dest: /etc/pam.d/common-session
+  #    regexp: '^session.*pam_mount\.so$'
+  #    insertafter: 'session.*pam_winbind\.so'
+  #    line: 'session optional pam_mount.so'
+  #    state: present
+  #  sudo: yes
