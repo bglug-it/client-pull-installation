@@ -38,6 +38,7 @@
     - cifs-utils
     - ubuntu-edu-secondary
     - epoptes-client
+    - firefox-locale-it
   tags: edu-install
   sudo: yes
 
