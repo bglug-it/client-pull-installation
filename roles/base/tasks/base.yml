@@ -30,6 +30,20 @@
   tags: edu-install
   sudo: yes
 
+- name: Rimozione di pacchetti installati ma non richiesti
+  apt: pkg={{ item }} state=absent purge=yes
+  with_items:
+    - libnss-mdns
+    - unity-webapps-common
+    - zeitgeist-core
+    - zeitgeist-datahub
+    - epoptes
+  sudo: yes
+
+- name: Rimozione pacchetti non più necessari
+  shell: apt-get -y autoremove
+  sudo: yes
+
 - name: Installazione pacchetti aggiuntivi
   apt: pkg={{ item }} state=installed
   with_items:
@@ -45,20 +59,6 @@
 - name: Aggiungo VirtualBox Guest Additions, se necessario
   apt: pkg=virtualbox-guest-dkms state=present
   when: ansible_product_name == "VirtualBox"
-  sudo: yes
-
-- name: Rimozione di pacchetti installati ma non richiesti
-  apt: pkg={{ item }} state=absent purge=yes
-  with_items:
-    - libnss-mdns
-    - unity-webapps-common
-    - zeitgeist-core
-    - zeitgeist-datahub
-    - epoptes
-  sudo: yes
-
-- name: Rimozione pacchetti non più necessari
-  shell: apt-get -y autoremove
   sudo: yes
 
 - name: Correggo NetworkManager per gestire la rete
