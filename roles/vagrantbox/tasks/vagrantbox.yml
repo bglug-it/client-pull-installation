@@ -1,0 +1,42 @@
+---
+# Prepara una vagrant box appena finito di scaricare i pacchetti
+- name: Creazione utente Vagrant
+  user:
+    name: vagrant
+    comment: "Vagrant user"
+    group: users
+    password: $6$rounds=100000$KsiL/LYcWMS2yE7g$Ti2DyLyhuB6phO255Sx.pNs5OKoiV76g6qXry6JnzL0BxJ7CM4Q0P9HtYEwEsY7QKbENJcvRc3g8Kxw7zvBmm1
+    shell: /bin/bash
+    state: present
+    generate_ssh_key: yes
+  sudo: yes
+
+- name: Concessione diritti sudo all'utente vagrant
+  lineinfile:
+    dest: /etc/sudoers.d/vagrant
+    regexp: "^vagrant.*NOPASSWD"
+    line: "vagrant ALL=(ALL:ALL) NOPASSWD:ALL"
+    owner: root
+    group: root
+    mode: 0440
+    create: yes
+    state: present
+    validate: '/usr/sbin/visudo -cf %s'
+  sudo: yes
+
+- name: Autorizzo chiave pubblica insicura per vagrant
+  authorized_key:
+    user: vagrant
+    key: "https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"
+  sudo: yes
+
+- name: Autorizzo chiave pubblica di amgmt del server
+  authorized_key:
+    user: vagrant
+    key: {{ 'http://' + serverfqdn + ':3000/mgmtkey' }}
+  sudo: yes
+
+- name: Utilizzo il task di cleanup della box, prima di spegnere
+  shell: curl -s http://sys42.eu/downloads/box-cleanup.sh | sudo bash
+  async: 0
+  poll: 0
