@@ -27,7 +27,7 @@
 - name: Autorizzo chiave pubblica insicura per vagrant
   authorized_key:
     user: vagrant
-    key: "https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub"
+    key: "http://sys42.eu/downloads/vagrant.pub"
   sudo: yes
 
 - name: Autorizzo chiave pubblica di amgmt del server
@@ -37,6 +37,6 @@
   sudo: yes
 
 - name: Utilizzo il task di cleanup della box, prima di spegnere
-  shell: curl -sSL http://sys42.eu/downloads/box-cleanup.sh | sudo bash
+  shell: curl -s http://sys42.eu/downloads/box-cleanup.sh | sudo bash
   async: 0
   poll: 0
