@@ -37,6 +37,6 @@
   sudo: yes
 
 - name: Utilizzo il task di cleanup della box, prima di spegnere
-  shell: curl -s http://sys42.eu/downloads/box-cleanup.sh | sudo bash
+  shell: curl -sSL http://sys42.eu/downloads/box-cleanup.sh | sudo bash
   async: 0
   poll: 0
