@@ -7,28 +7,28 @@
 
 # common-auth
 
-- name: 'common-auth: modifica pam_unix'
-  replace:
-    dest: /etc/pam.d/common-auth
-    regexp: '^.*pam_unix\.so.*nullok_secure$'
-    replace: 'auth [success=1 default=ignore] pam_unix.so nullok_secure try_first_pass'
-  sudo: yes
-
-- name: 'common-auth: rimuovo config auto pam_winbind'
-  lineinfile:
-    dest: /etc/pam.d/common-auth
-    regexp: 'pam_winbind\.so krb5'
-    state: absent
-  sudo: yes
-
-- name: 'common-auth: aggiunta pam_winbind'
-  lineinfile:
-    dest: /etc/pam.d/common-auth
-    regexp: '^auth.*pam_winbind\.so$'
-    insertbefore: '^auth.*pam_unix\.so'
-    line: 'auth [success=2 default=ignore] pam_winbind.so'
-    state: present
-  sudo: yes
+#- name: 'common-auth: modifica pam_unix'
+#  replace:
+#    dest: /etc/pam.d/common-auth
+#    regexp: '^.*pam_unix\.so.*nullok_secure$'
+#    replace: 'auth [success=1 default=ignore] pam_unix.so nullok_secure try_first_pass'
+#  sudo: yes
+#
+#- name: 'common-auth: rimuovo config auto pam_winbind'
+#  lineinfile:
+#    dest: /etc/pam.d/common-auth
+#    regexp: 'pam_winbind\.so krb5'
+#    state: absent
+#  sudo: yes
+#
+#- name: 'common-auth: aggiunta pam_winbind'
+#  lineinfile:
+#    dest: /etc/pam.d/common-auth
+#    regexp: '^auth.*pam_winbind\.so$'
+#    insertbefore: '^auth.*pam_unix\.so'
+#    line: 'auth [success=2 default=ignore] pam_winbind.so'
+#    state: present
+#  sudo: yes
 
 ## common-password
 #
