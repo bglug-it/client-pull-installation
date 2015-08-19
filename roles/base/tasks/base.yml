@@ -66,6 +66,7 @@
     dest: /etc/network/interfaces
     regexp: "{{ item }}"
     state: absent
+  when: ansible_product_name != "VirtualBox"
   with_items:
     - ^auto eth0
     - ^iface eth0
