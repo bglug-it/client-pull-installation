@@ -12,8 +12,12 @@ processed in a single pass from top-to-bottom
   <debug enable="0" />
 
   <!-- Volume definitions -->
-  <volume user="*" sgrp="domain users" fstype="cifs" server="{{ server }}" path="%(USER)" mountpoint="~" options="iocharset=utf8,file_mode=0644,dir_mode=0755" />
-  <volume user="*" sgrp="domain users" fstype="cifs" server="{{ server }}" path="shared" mountpoint="~/Condiviso" options="iocharset=utf8,file_mode=0664,dir_mode=0775" />
+  <volume user="*" sgrp="domain users" fstype="cifs"
+	  server="{{ server }}" path="%(USER)" mountpoint="~"
+	  options="iocharset=utf8,file_mode=0644,dir_mode=0755,cache=strict" />
+  <volume user="*" sgrp="domain users" fstype="cifs"
+	  server="{{ server }}" path="shared" mountpoint="~/Condiviso"
+	  options="iocharset=utf8,file_mode=0664,dir_mode=0775,cache=strict" />
 
   <!-- pam_mount parameters: General tunables -->
   <!--
@@ -25,13 +29,13 @@ processed in a single pass from top-to-bottom
     You will need to explicitly initialize it with the empty string
     to reset the defaults to nothing.
   -->
-  <mntoptions allow="loop,encryption,fsck,nonempty,allow_root,allow_other" />
   <!--
+  <mntoptions allow="loop,encryption,fsck,nonempty,allow_root,allow_other" />
   <mntoptions deny="suid,dev" />
   <mntoptions allow="*" />
   <mntoptions deny="*" />
-  -->
   <mntoptions require="nosuid,nodev,exec" />
+  -->
 
   <logout wait="10" hup="0" term="0" kill="0" />
   
