@@ -71,7 +71,7 @@
     - ^auto eth0
     - ^iface eth0
 
-- name: Cambio greeter di default
+- name: 'Cambio sessione di default (gnome-fallback)'
   lineinfile:
     dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
     regexp: "^user-session=ubuntu$"
