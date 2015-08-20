@@ -8,6 +8,15 @@
   sudo: yes
   register: cfg_ntp
 
+- name: Permetto a NTP di utilizzare informazioni da winbind
+  lineinfile:
+    dest: /etc/apparmor.d/usr.sbin.ntpd
+    regexp: "^/run/samba/winbindd/pipe"
+    line: '/run/samba/winbindd/pipe crw,'
+    insertafter: 'samba/ntp_signd/socket'
+    state: present
+  sudo: yes
+
 - name: Riavvio ntp
   service: name=ntp state=restarted
   sudo: yes

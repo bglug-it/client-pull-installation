@@ -4,6 +4,14 @@
   sudo: yes
   register: cfg_samba
 
+- name: Configuro la home per apparmor
+  lineinfile:
+    dest: /etc/apparmor.d/tunables/home
+    regexp: '^@\{HOMEDIRS\}=/home/ /home/{{ domainshort }}/$'
+    line: '^@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
+    state: present
+  sudo: yes
+
 - name: Riavvio samba
   shell: restart smbd
   sudo: yes
