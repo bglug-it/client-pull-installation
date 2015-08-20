@@ -72,7 +72,7 @@
     - ^iface eth0
 
 - name: 'Cambio sessione di default (gnome-fallback)'
-  lineinfile:
+  replace:
     dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
     regexp: "^user-session=ubuntu$"
-    line: "user-session=gnome-fallback"
+    replace: "user-session=gnome-fallback"
