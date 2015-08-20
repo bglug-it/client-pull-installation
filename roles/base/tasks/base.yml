@@ -42,6 +42,8 @@
 
 - name: Rimozione pacchetti non più necessari
   shell: apt-get -y autoremove
+  register: autoremove
+  changed_when: 'Rimozione' in autoremove.stdout 
   sudo: yes
 
 - name: Installazione pacchetti aggiuntivi
