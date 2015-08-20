@@ -5,7 +5,7 @@
     mode: 0755
     state: directory
   with_items:
-    - /etc/firefox/profile
+    - /usr/lib/firefox/browser/defaults/profile
     - /usr/local/share/ca-certificates/{{ domainfull }}
   sudo: yes
 
@@ -22,5 +22,5 @@
 - name: Scarico il database dei certificati di FF con certificato server aggiornato.
   get_url:
     url: 'http://{{ serverfqdn }}/ks/cert8.db'
-    dest: /etc/firefox/profile/cert8.db
+    dest: /usr/lib/firefox/browser/defaults/profile
   sudo: yes
