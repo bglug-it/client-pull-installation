@@ -1,4 +1,14 @@
 ---
+- name: Verifico presenza di directory necessarie
+  file:
+    path: '{{ item }}'
+    mode: 0755
+    state: directory
+  with_items:
+    - /etc/firefox/profile
+    - /usr/local/share/ca-certificates/{{ domainfull }}
+  sudo: yes
+
 - name: Scarico il certificato client per proxy trasparente SSL
   get_url:
     url: http://{{ serverfqdn }}/proxy.crt
