@@ -1,0 +1,16 @@
+---
+- name: Scarico il certificato client per proxy trasparente SSL
+  get_url:
+    url: http://{{ serverfqdn }}/proxy.crt
+    dest: /usr/local/share/ca-certificates/{{ domainfull }}/ca.crt 
+  sudo: yes
+
+- name: Aggiungo il certificato a quelli utilizzati dal sistema
+  shell: update-ca-certificates
+  sudo: yes
+
+- name: Scarico il database dei certificati di FF con certificato server aggiornato.
+  get_url:
+    url: 'http://{{ serverfqdn }}/ks/cert8.db'
+    dest: /etc/firefox/profile/cert8.db
+  sudo: yes
