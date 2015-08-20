@@ -55,6 +55,7 @@
     - ubuntu-edu-secondary
     - epoptes-client
     - firefox-locale-it
+    - libnss-myhostname
   tags: edu-install
   sudo: yes
 
