@@ -7,7 +7,7 @@
 - name: Configuro la home per apparmor
   lineinfile:
     dest: /etc/apparmor.d/tunables/home
-    regexp: '^@\{HOMEDIRS\}=/home/ /home/{{ domainshort }}/$'
+    regexp: '^@\{HOMEDIRS\}=/home/$'
     line: '@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
     state: present
   sudo: yes
