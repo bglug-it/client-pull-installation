@@ -8,7 +8,7 @@
   lineinfile:
     dest: /etc/apparmor.d/tunables/home
     regexp: '^@\{HOMEDIRS\}=/home/ /home/{{ domainshort }}/$'
-    line: '^@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
+    line: '@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
     state: present
   sudo: yes
 
