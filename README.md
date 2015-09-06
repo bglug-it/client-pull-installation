@@ -11,8 +11,6 @@ installation via PXE and using custom kickstart files.
 
 ## ToDo List ##
 
-* Fix HTTPS proxy (needs to load a certificate in each client)
-* Add and test operators for sudo operations
 * Implementation of dynamic inventory for `ansible-pull` (should permit to
   pass further configuration variables with the help of
 [`doraemon`](https://github.com/bglug-it/doraemon))
