@@ -1,7 +1,7 @@
 ---
 # Configurazione di base di PAM per dominio
 
-- name: 'installazione libpam-winbind'
+- name: Installazione libpam-winbind
   apt: name=libpam-winbind state=present
   sudo: yes
 

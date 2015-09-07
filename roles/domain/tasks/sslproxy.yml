@@ -14,9 +14,11 @@
     url: http://{{ serverfqdn }}/proxy.crt
     dest: /usr/local/share/ca-certificates/{{ domainfull }}/ca.crt 
   sudo: yes
+  register: proxycrt_dwnl
 
 - name: Aggiungo il certificato a quelli utilizzati dal sistema
   shell: update-ca-certificates
+  when: proxycrt_dwnl|changed
   sudo: yes
 
 - name: Scarico il database dei certificati di FF con certificato server aggiornato.
