@@ -1,0 +1,13 @@
+---
+# Role based package installation
+- name: Installazione pacchetti da aggiungere per il ruolo
+  apt: name={{ item }} state=present
+  sudo: yes
+  when: "{{ addpkg }}|length > 0"
+  with_items: "{{ addpkg }}"
+
+- name: Rimozione pacchetti da rimuovere per il ruolo
+  apt: name={{ item }} state=absent purge=yes
+  sudo: yes
+  when: "{{ delpkg }}|length > 0"
+  with_items: "{{ delpkg }}"
