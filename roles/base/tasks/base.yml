@@ -37,13 +37,13 @@
 
 - name: Rimozione pacchetti installati ruolo client
   apt: pkg={{ item }} state=absent purge=yes
-  with_items: {{ base_client_delpkg }}
+  with_items: "{{ base_client_delpkg }}"
   sudo: yes
   when: "{{ role }} == 'client'"
 
 - name: Rimozione pacchetti installati ruolo docenti
   apt: pkg={{ item }} state=absent purge=yes
-  with_items: {{ base_docenti_delpkg }}
+  with_items: "{{ base_docenti_delpkg }}"
   sudo: yes
   when: "{{ role }} == 'docenti'"
 
@@ -59,24 +59,15 @@
   tags: edu-install
   sudo: yes
 
-- name: Rimozione pacchetti installati ruolo client
+- name: Installazione pacchetti installati ruolo client
   apt: pkg={{ item }} state=present
   with_items: "{{ base_client_addpkg }}"
   sudo: yes
   when: "{{ role }} == 'client'"
 
-- name: Rimozione pacchetti installati ruolo docenti
+- name: Installazione pacchetti installati ruolo docenti
   apt: pkg={{ item }} state=present
   with_items: "{{ base_docenti_addpkg }}"
-  sudo: yes
-  when: "{{ role }} == 'docenti'"
-
-
-- name: Installazione pacchetti aggiuntivi ruolo docente
-  apt: pkg={{ item }} state=installed
-  with_items:
-    - epoptes
-  tags: roles
   sudo: yes
   when: "{{ role }} == 'docenti'"
 
