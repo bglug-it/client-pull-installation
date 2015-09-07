@@ -32,13 +32,20 @@
 
 - name: Rimozione di pacchetti installati ma non richiesti
   apt: pkg={{ item }} state=absent purge=yes
-  with_items:
-    - libnss-mdns
-    - unity-webapps-common
-    - zeitgeist-core
-    - zeitgeist-datahub
-    - epoptes
+  with_items: "{{ base_common_delpkg }}"
   sudo: yes
+
+- name: Rimozione pacchetti installati ruolo client
+  apt: pkg={{ item }} state=absent purge=yes
+  with_items: {{ base_client_delpkg }}
+  sudo: yes
+  when: "{{ role }} == 'client'"
+
+- name: Rimozione pacchetti installati ruolo docenti
+  apt: pkg={{ item }} state=absent purge=yes
+  with_items: {{ base_docenti_delpkg }}
+  sudo: yes
+  when: "{{ role }} == 'docenti'"
 
 - name: Rimozione pacchetti non più necessari
   shell: apt-get -y autoremove
@@ -48,16 +55,30 @@
 
 - name: Installazione pacchetti aggiuntivi
   apt: pkg={{ item }} state=installed
-  with_items:
-    - vim
-    - screen
-    - cifs-utils
-    - ubuntu-edu-secondary
-    - epoptes-client
-    - firefox-locale-it
-    - libnss-myhostname
+  with_items: "{{ base_common_addpkg }}"
   tags: edu-install
   sudo: yes
+
+- name: Rimozione pacchetti installati ruolo client
+  apt: pkg={{ item }} state=present
+  with_items: "{{ base_client_addpkg }}"
+  sudo: yes
+  when: "{{ role }} == 'client'"
+
+- name: Rimozione pacchetti installati ruolo docenti
+  apt: pkg={{ item }} state=present
+  with_items: "{{ base_docenti_addpkg }}"
+  sudo: yes
+  when: "{{ role }} == 'docenti'"
+
+
+- name: Installazione pacchetti aggiuntivi ruolo docente
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - epoptes
+  tags: roles
+  sudo: yes
+  when: "{{ role }} == 'docenti'"
 
 - name: Aggiungo VirtualBox Guest Additions, se necessario
   apt: pkg=virtualbox-guest-dkms state=present
