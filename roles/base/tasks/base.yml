@@ -39,13 +39,13 @@
   apt: pkg={{ item }} state=absent purge=yes
   with_items: "{{ base_client_delpkg }}"
   sudo: yes
-  when: "{{ role }} == 'client'"
+  when: "'{{ role }}' == 'client'"
 
 - name: Rimozione pacchetti installati ruolo docenti
   apt: pkg={{ item }} state=absent purge=yes
   with_items: "{{ base_docenti_delpkg }}"
   sudo: yes
-  when: "{{ role }} == 'docenti'"
+  when: "'{{ role }}' == 'docenti'"
 
 - name: Rimozione pacchetti non più necessari
   shell: apt-get -y autoremove
@@ -63,13 +63,13 @@
   apt: pkg={{ item }} state=present
   with_items: "{{ base_client_addpkg }}"
   sudo: yes
-  when: "{{ role }} == 'client'"
+  when: "'{{ role }}' == 'client'"
 
 - name: Installazione pacchetti installati ruolo docenti
   apt: pkg={{ item }} state=present
   with_items: "{{ base_docenti_addpkg }}"
   sudo: yes
-  when: "{{ role }} == 'docenti'"
+  when: "'{{ role }}' == 'docenti'"
 
 - name: Aggiungo VirtualBox Guest Additions, se necessario
   apt: pkg=virtualbox-guest-dkms state=present
