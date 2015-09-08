@@ -12,9 +12,9 @@ base_common_delpkg:
   - unity-webapps-common
   - zeitgeist-core
   - zeitgeist-datahub
-base_client_addpkg:  
+base_client_addpkg: []
 base_client_delpkg:
   - epoptes
 base_docenti_addpkg:
   - epoptes
-base_docenti_delpkg:
+base_docenti_delpkg: []
