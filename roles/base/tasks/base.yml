@@ -39,7 +39,7 @@
   apt: pkg={{ item }} state=absent purge=yes
   with_items: "{{ base_client_delpkg }}"
   sudo: yes
-  when: "'{{ role }}' == 'client' and {{ if base_client_delpkg is defined }}" 
+  when: role == 'client' and base_client_delpkg is defined 
 
 - name: Rimozione pacchetti installati ruolo docenti
   apt: pkg={{ item }} state=absent purge=yes
