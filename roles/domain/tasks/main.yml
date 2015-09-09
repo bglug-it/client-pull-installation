@@ -27,6 +27,11 @@
     - domain
     - pkgs
 
+- include: epoptessrv.yml
+  tags:
+    - domain
+    - epoptes
+
 - include: pam_base.yml
   tags:
     - domain

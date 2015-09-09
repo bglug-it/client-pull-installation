@@ -1,0 +1,8 @@
+---
+- name: "Configuro il pc docente perché i docenti possano usare Epoptes"
+  replace:
+    regexp: "^SOCKET_GROUP=epoptes$"
+    replace: 'SOCKET_GROUP="{{ domainshort }}\docenti"'
+    dest: /etc/default/epoptes
+  sudo: yes
+  when: role == 'docenti'
