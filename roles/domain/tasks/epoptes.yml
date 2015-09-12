@@ -1,0 +1,37 @@
+---
+- name: "Configuro il pc docente come Epoptes Server"
+  replace:
+    regexp: "^#SOCKET_GROUP=epoptes$"
+    replace: 'SOCKET_GROUP="{{ domainshort }}\docenti"'
+    dest: /etc/default/epoptes
+  sudo: yes
+  when: role == 'docenti'
+
+- name: Trovo il nome dell'epoptes server
+  get_url:
+    url: "http://{{ serverfqdn }}:3000/epoptes-srv"
+    dest: /tmp/epoptes-srv
+  when: role == 'client'
+  register: get_epo_srv_name
+
+- name: Verifico il nome, altrimenti salto
+  shell: cat /tmp/epoptes-srv
+  register: epo_srv_name
+  when: role == 'client' and get_epo_srv_name|changed
+  changed_when: 'none' not in epo_srv_name.stdout
+
+- name: "Configuro il client per Epoptes"
+  replace:
+    regexp: "^#SERVER=server"
+    replace: "SERVER={{ epo_srv_name.stdout }}"
+  when: role == 'client' and epo_srv_name|changed
+  notify:
+    - reboot
+  sudo: yes
+
+- name: Pulisco
+  file:
+    src: /tmp/epoptes-srv
+    state: absent
+  sudo: yes
+  when: get_epo_srv_name|changed

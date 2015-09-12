@@ -27,7 +27,7 @@
     - domain
     - pkgs
 
-- include: epoptessrv.yml
+- include: epoptes.yml
   tags:
     - domain
     - epoptes
