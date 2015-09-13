@@ -18,7 +18,7 @@
   shell: cat /tmp/epoptes-srv
   register: epo_srv_name
   when: role == 'client' and get_epo_srv_name|changed
-  changed_when: 'none' not in epo_srv_name.stdout
+  changed_when: "'none' not in epo_srv_name.stdout"
 
 - name: Configuro il client per Epoptes
   replace:
