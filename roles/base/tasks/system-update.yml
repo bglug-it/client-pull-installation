@@ -1,0 +1,10 @@
+---
+# Manage system upgrade
+
+- name: Updating available packages
+  apt: update_cache=yes
+  sudo: yes
+
+- name: Upgrading system
+  apt: upgrade=full
+  sudo: yes

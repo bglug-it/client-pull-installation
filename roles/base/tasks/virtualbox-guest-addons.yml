@@ -1,0 +1,7 @@
+---
+# Manage Virtualbox additions
+
+- name: Adding Virtualbox Guest Additions if required
+  apt: pkg=virtualbox-guest-dkms state=present
+  when: ansible_product_name == "VirtualBox"
+  sudo: yes

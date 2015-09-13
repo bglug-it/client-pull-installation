@@ -1,0 +1,9 @@
+---
+# Manage Repository changes (but only for physical machines)
+
+- name: Change repository sources
+  template:
+    src: sources.list
+    dest: /etc/apt/sources.list
+    backup: yes
+  when: ansible_product_name != "VirtualBox"

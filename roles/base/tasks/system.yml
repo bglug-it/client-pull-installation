@@ -1,0 +1,12 @@
+---
+# Adjusting other settings due to unattended installation
+
+- name: Adjusting connections for NetworkManager
+  lineinfile:
+    dest: /etc/network/interfaces
+    regexp: "{{ item }}"
+    state: absent
+  when: ansible_product_name != "VirtualBox"
+  with_items:
+    - ^auto eth0
+    - ^iface eth0

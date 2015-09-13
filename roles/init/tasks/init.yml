@@ -1,17 +1,7 @@
 ---
-# Task di configurazione iniziali
+# Initialization task (for simpler ansible management)
 
-- name: Creazione utente di gestione
-  user:
-    name: amgmt
-    comment: "Ansible Management User"
-    group: users
-    password: $6$rounds=100000$XvHuMoXtpCksx379$nhlfUn38.oBB7JrDrtwfUisw8T0Bg5InzFq1fw31mcEmGZ2AYFkFK2zC2g04lSfw.kpdSgqH3Dl5q9r1fY6.k.
-    shell: /bin/bash
-    state: present
-    generate_ssh_key: yes
-
-- name: Concessione diritti sudo all'utente root
+- name: Setting up sudoers for root
   lineinfile:
     dest: /etc/sudoers.d/root
     regexp: "^root.*NOPASSWD"
@@ -23,7 +13,17 @@
     state: present
     validate: '/usr/sbin/visudo -c -f %s'
 
-- name: Concessione diritti sudo all'utente ansible
+- name: Creating Ansible Management User
+  user:
+    name: amgmt
+    comment: "Ansible Management User"
+    group: users
+    password: $6$rounds=100000$XvHuMoXtpCksx379$nhlfUn38.oBB7JrDrtwfUisw8T0Bg5InzFq1fw31mcEmGZ2AYFkFK2zC2g04lSfw.kpdSgqH3Dl5q9r1fY6.k.
+    shell: /bin/bash
+    state: present
+    generate_ssh_key: yes
+
+- name: Setting up sudoers for Ansible Management User
   lineinfile:
     dest: /etc/sudoers.d/amgmt
     regexp: "^amgmt.*NOPASSWD"
@@ -35,7 +35,7 @@
     state: present
     validate: '/usr/sbin/visudo -c -f %s'
 
-- name: Autorizzazione della chiave pubblica del server
+- name: Authorizing Ansible Management User's key from server
   authorized_key:
     user: amgmt
     key: "{{ lookup('pipe', 'curl -sSL http://' + serverfqdn + ':3000/mgmtkey') }}"

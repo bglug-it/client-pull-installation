@@ -1,9 +1,36 @@
 ---
-# Configurazioni di base.
-# Al termine delle configurazioni di base, avremo un'installazione
-# completa di Edubuntu.
+# System base configurations.
+# At the end of system configuration, we should have a complete
+# Edubuntu system
 
-- include: base.yml
+- include: apt-sources.yml
+  tags:
+    - base
+    - apt-sources
+
+- include: virtualbox-guest-addons.yml
+  tags:
+    - base
+    - virtualbox-addons
+
+- include: system-update.yml
+  tags:
+    - base
+    - update
+
+- include: desktop-environment.yml
+  tags:
+    - base
+    - de
+    - desktop-environment
+
+- include: packages.yml
+  tags:
+    - base
+    - pkgs
+    - packages
+
+- include: system.yml
   tags:
     - base
     - edubuntu

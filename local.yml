@@ -7,5 +7,4 @@
   roles:
     - init
     - base
-    - vagrantbox
     - domain
