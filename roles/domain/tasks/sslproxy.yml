@@ -7,13 +7,13 @@
     mode: 0755
     state: directory
   with_items:
-    - /usr/lib/firefox/browser/defaults/profile
-    - /usr/local/share/ca-certificates/{{ domainfull }}
+    - '/usr/lib/firefox/browser/defaults/profile'
+    - '/usr/local/share/ca-certificates/{{ domainfull }}'
 
 - name: Getting SSL transparent proxy certificate
   get_url:
     url: 'http://{{ serverfqdn }}/proxy.crt'
-    dest: /usr/local/share/ca-certificates/{{ domainfull }}/ca.crt 
+    dest: '/usr/local/share/ca-certificates/{{ domainfull }}/ca.crt'
   register: proxycrt_dwnl
 
 - name: Adding certificate sto the ones used by the system
