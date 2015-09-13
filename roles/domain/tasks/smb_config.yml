@@ -1,26 +1,44 @@
 ---
-- name: Configurazione smb.conf
-  template: src=smb.conf dest=/etc/samba/smb.conf validate='testparm -s %s' backup=yes
-  sudo: yes
+# SAMBA configuration for domain
+
+- name: Configuring SAMBA
+  template:
+    src: smb.conf
+    dest: /etc/samba/smb.conf
+    validate: 'testparm -s %s'
+    backup: yes
   register: cfg_samba
 
-- name: Configuro la home per apparmor
+- name: Configuring AppArmor home directories
   replace:
     dest: /etc/apparmor.d/tunables/home
     regexp: '^@\{HOMEDIRS\}=/home/$'
     replace: '@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
-  sudo: yes
 
-- name: Riavvio samba
-  shell: restart smbd
-  sudo: yes
+- name: SAMBA restart
+  service:
+    name: smbd
+    state: restarted
   when: cfg_samba|changed
 
-- name: Riavvio winbind
-  shell: restart winbind
-  sudo: yes
+- name: Winbind restart
+  service:
+    name: winbind
+    state: restarted
   when: cfg_samba|changed
 
-- name: Creazione home base
-  file: path=/home/{{ domainshort }} owner=root group=root state=directory
-  sudo: yes
+- name: Creating home base
+  file:
+    path: '/home/{{ domainshort }}'
+    owner: root
+    group: root
+    state: directory
+
+- name: Permitting SAMBA domopers to run sudo 
+  template:
+    src: sudoers.d
+    dest: /etc/sudoers.d/domain
+    owner: root
+    group: root
+    mode: 0440
+    validate: "/usr/sbin/visudo -cf %s"

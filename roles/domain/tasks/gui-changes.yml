@@ -1,5 +1,5 @@
 ---
-# Cambiamenti all'interfaccia grafica
+# Adjusting Graphical User Interface
 
 - include: lightdm.yml
   tags: lightdm

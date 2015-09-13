@@ -1,0 +1,7 @@
+---
+
+- name: reboot
+  shell: shutdown -r now "Reboot by Ansible."
+  sudo: yes
+  async: 0
+  poll: 0

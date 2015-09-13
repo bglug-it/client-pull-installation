@@ -1,7 +1,10 @@
 ---
-- name: Installazione pacchetti necessari per dominio
-  apt: pkg={{ item }} state=present
-  sudo: yes
+# Packages needed for domain join
+
+- name: Installing domain packages
+  apt:
+    pkg: {{ item }}
+    state: present
   with_items:
     - winbind
     - samba

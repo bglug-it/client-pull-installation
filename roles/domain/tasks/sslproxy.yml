@@ -1,5 +1,7 @@
 ---
-- name: Verifico presenza di directory necessarie
+# Adjusting system for domain proxy certificate
+
+- name: Creating needed directories
   file:
     path: '{{ item }}'
     mode: 0755
@@ -7,22 +9,19 @@
   with_items:
     - /usr/lib/firefox/browser/defaults/profile
     - /usr/local/share/ca-certificates/{{ domainfull }}
-  sudo: yes
 
-- name: Scarico il certificato client per proxy trasparente SSL
+- name: Getting SSL transparent proxy certificate
   get_url:
-    url: http://{{ serverfqdn }}/proxy.crt
+    url: 'http://{{ serverfqdn }}/proxy.crt'
     dest: /usr/local/share/ca-certificates/{{ domainfull }}/ca.crt 
-  sudo: yes
   register: proxycrt_dwnl
 
-- name: Aggiungo il certificato a quelli utilizzati dal sistema
+- name: Adding certificate sto the ones used by the system
   shell: update-ca-certificates
   when: proxycrt_dwnl|changed
   sudo: yes
 
-- name: Scarico il database dei certificati di FF con certificato server aggiornato.
+- name: Firefox settings to include certificate
   get_url:
     url: 'http://{{ serverfqdn }}/ks/cert8.db'
     dest: /usr/lib/firefox/browser/defaults/profile
-  sudo: yes

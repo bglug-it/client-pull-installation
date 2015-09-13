@@ -1,0 +1,12 @@
+---
+
+- hosts: localhost
+  user: root
+  vars_files:
+    - domainpwd.vault
+  vars:
+    vagrantbox: true
+  roles:
+    - vagrantbox
+
+

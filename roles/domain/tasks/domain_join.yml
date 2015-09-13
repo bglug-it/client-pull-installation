@@ -1,16 +1,14 @@
 ---
-- name: Permetto ai domadmins di usare sudo
-  template: src=sudoers.d dest=/etc/sudoers.d/domain owner=root group=root mode=0440 validate="/usr/sbin/visudo -cf %s"
-  sudo: yes
+# Domain join tasks
 
-- name: verifica join a dominio
+- name: Checking domain join
   shell: wbinfo -t
   sudo: yes
   register: check_domain
   changed_when: check_domain.rc != 0
   ignore_errors: yes
 
-- name: Join a dominio
+- name: Joining domain
   shell: net rpc join -U admin%{{ domainadminpasswd }}
   sudo: yes
   when: check_domain|changed

@@ -1,0 +1,8 @@
+---
+# Managing Epoptes installation on 'docenti' role.
+
+- name: Configuring the Epoptes server
+  lineinfile:
+    dest: /etc/default/epoptes
+    line: 'SOCKET_GROUP="{{ domainshort }}\docenti"'
+    state: present

@@ -1,10 +1,13 @@
 ---
-# Configurazione base per pam_mount
+# PAM_mount configuration
 
-- name: Installazione pam_mount
-  apt: name=libpam-mount state=present
-  sudo: yes
+- name: Installing pam_mount
+  apt:
+    name: libpam-mount
+    state: present
 
-- name: Configurazione di pam_mount
-  template: src=pam_mount.conf.xml dest=/etc/security/pam_mount.conf.xml backup=yes
-  sudo: yes
+- name: Configuring pam_mount
+  template:
+    src: pam_mount.conf.xml
+    dest: /etc/security/pam_mount.conf.xml
+    backup: yes

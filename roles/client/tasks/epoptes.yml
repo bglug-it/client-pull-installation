@@ -1,0 +1,43 @@
+---
+# Managing epoptes on 'client' role
+
+- name: Getting epoptes server name
+  get_url:
+    url: "http://{{ serverfqdn }}:3000/epoptes-srv"
+    dest: /tmp/epoptes-srv
+  register: get_epo_srv_name
+
+- name: Checking for a correct name
+  shell: cat /tmp/epoptes-srv
+  register: epo_srv_name
+  when: get_epo_srv_name|changed
+  changed_when: "'none' not in epo_srv_name.stdout"
+
+- name: Configuring the client
+  lineinfile:
+    dest: /etc/default/epoptes-client
+    regexp: "^#SERVER=server"
+    line: "SERVER={{ epo_srv_name.stdout }}"
+    state: present
+  when: epo_srv_name|changed
+
+- name: Checking for an already existent certificate
+  file:
+    path: /etc/epoptes/server.crt
+    status: file
+  when: epo_srv_name|changed
+  register: crt_epo_exists
+  ignore_errors: yes
+
+- name: Getting the epoptes server certificate 
+  shell: /usr/sbin/epoptes-client -c
+  sudo: yes
+  when: crt_epo_exists|failed
+  notify:
+    - reboot
+
+- name: Cleanup
+  file:
+    path: /tmp/epoptes-srv
+    state: absent
+  when: get_epo_srv_name|changed

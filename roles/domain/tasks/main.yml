@@ -1,6 +1,5 @@
 ---
-# Configurazioni per messa in dominio.
-# Impostazioni grafiche da gestire in dominio
+# Domain configurations
 
 - include: ntp.yml
   tags:
@@ -26,11 +25,6 @@
   tags:
     - domain
     - pkgs
-
-- include: epoptes.yml
-  tags:
-    - domain
-    - epoptes
 
 - include: pam_base.yml
   tags:

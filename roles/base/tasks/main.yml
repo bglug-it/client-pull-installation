@@ -34,8 +34,3 @@
   tags:
     - base
     - edubuntu
-
-- include: role.yml
-  tags:
-    - base
-    - role

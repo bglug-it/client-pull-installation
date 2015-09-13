@@ -1,9 +1,13 @@
 ---
-# Configurazione di base di PAM per dominio
+# base configuration for PAM Module
 
-- name: Installazione libpam-winbind
-  apt: name=libpam-winbind state=present
-  sudo: yes
+- name: Installing winbind bindings for PAM
+  apt:
+    name: libpam-winbind
+    state: present
+
+# Leaving them here commented, as they may be needed in the future
+# for improvements on login times.
 
 # common-auth
 

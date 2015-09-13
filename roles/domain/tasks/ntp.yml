@@ -1,23 +1,31 @@
 ---
-- name: Installazione ntp
-  apt: name=ntp state=present
-  sudo: yes
+# Configuring NTP for domain clients
 
-- name: Configurazione ntp
-  template: src=ntp.conf dest=/etc/ntp.conf backup=yes owner=root group=root mode=0644
-  sudo: yes
+- name: Installing NTP
+  apt:
+    name: ntp
+    state: present
+
+- name: Configuring NTP
+  template:
+    src: ntp.conf
+    dest: /etc/ntp.conf
+    backup: yes
+    owner: root
+    group: root
+    mode: 0644
   register: cfg_ntp
 
-- name: Permetto a NTP di utilizzare informazioni da winbind
+- name: Configuring AppArmor for NTP
   lineinfile:
     dest: /etc/apparmor.d/usr.sbin.ntpd
     regexp: "/run/samba/winbindd/pipe"
     line: '  /run/samba/winbindd/pipe crw,'
     insertafter: 'samba/ntp_signd/socket'
     state: present
-  sudo: yes
 
-- name: Riavvio ntp
-  service: name=ntp state=restarted
-  sudo: yes
+- name: Restarting NTP service
+  service: 
+    name: ntp
+    state: restarted
   when: cfg_ntp|changed

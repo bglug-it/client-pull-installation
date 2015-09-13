@@ -1,0 +1,13 @@
+---
+# Managing installation/deletion of packages set with NetworkPackageManager
+# within NethServer console
+
+- name: Installing packages for specific role from NetworkPackageManager
+  apt: name={{ item }} state=present
+  sudo: yes
+  with_items: "{{ addpkg }}"
+
+- name: Removing packages for specific role from NetworkPackageManager
+  apt: name={{ item }} state=absent purge=yes
+  sudo: yes
+  with_items: "{{ delpkg }}"

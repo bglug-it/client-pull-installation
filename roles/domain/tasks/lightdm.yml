@@ -1,6 +1,7 @@
 ---
+# Adjusting lightdm settings
 
-- name: Altre impostazioni lightdm
+- name: Adjusting lightdm settings
   lineinfile:
     dest: /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
     regexp: "{{ item }}"

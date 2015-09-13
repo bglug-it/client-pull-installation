@@ -1,0 +1,8 @@
+---
+# Managing actions for role 'docenti'
+
+- include: epoptes.yml
+  when: role == 'docenti'
+  tags:
+    - role
+    - docenti
