@@ -28,15 +28,18 @@
   when: role == 'client' and epo_srv_name|changed
   sudo: yes
 
-- name: Prendo il certificato
-  shell: "test -f /etc/epoptes/server.crt || /usr/sbin/epoptes-client -c"
-  sudo: yes
+- name: Verifica certificato
+  file:
+    path: /etc/epoptes/server.crt
+    status: file
   when: role == 'client' and epo_srv_name|changed
-  register: crt_epo_srv
+  register: crt_epo_exists
+  ignore_errors: yes
 
-- name: Riavvio il client alla ricezione di un certificato.
-  shell: /bin/true
-  when: role == 'client' and crt_epo_srv|changed
+- name: Prendo il certificato
+  shell: /usr/sbin/epoptes-client -c
+  sudo: yes
+  when: role == 'client' and crt_epo_exists|failed
   notify:
     - reboot
 
