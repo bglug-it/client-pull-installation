@@ -32,6 +32,11 @@
   shell: "test -f /etc/epoptes/server.crt || /usr/sbin/epoptes-client -c"
   sudo: yes
   when: role == 'client' and epo_srv_name|changed
+  register: crt_epo_srv
+
+- name: Riavvio il client alla ricezione di un certificato.
+  shell: /bin/true
+  when: role == 'client' and crt_epo_srv|changed
   notify:
     - reboot
 
