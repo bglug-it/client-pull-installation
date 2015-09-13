@@ -24,6 +24,7 @@
   replace:
     regexp: "^#SERVER=server"
     replace: "SERVER={{ epo_srv_name.stdout }}"
+    dest: /etc/default/epoptes-client
   when: role == 'client' and epo_srv_name|changed
   sudo: yes
 
