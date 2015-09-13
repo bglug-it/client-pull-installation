@@ -29,7 +29,7 @@
   sudo: yes
 
 - name: Prendo il certificato
-  shell: /usr/sbin/epoptes-client -c
+  shell: "test -f /etc/epoptes/server.crt || /usr/sbin/epoptes-client -c"
   sudo: yes
   when: role == 'client' and epo_srv_name|changed
   notify:
@@ -37,7 +37,7 @@
 
 - name: Pulisco
   file:
-    src: /tmp/epoptes-srv
+    path: /tmp/epoptes-srv
     state: absent
   sudo: yes
   when: get_epo_srv_name|changed
