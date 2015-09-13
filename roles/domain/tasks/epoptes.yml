@@ -20,14 +20,19 @@
   when: role == 'client' and get_epo_srv_name|changed
   changed_when: 'none' not in epo_srv_name.stdout
 
-- name: "Configuro il client per Epoptes"
+- name: Configuro il client per Epoptes
   replace:
     regexp: "^#SERVER=server"
     replace: "SERVER={{ epo_srv_name.stdout }}"
   when: role == 'client' and epo_srv_name|changed
+  sudo: yes
+
+- name: Prendo il certificato
+  shell: /usr/sbin/epoptes-client -c
+  sudo: yes
+  when: role == 'client' and epo_srv_name|changed
   notify:
     - reboot
-  sudo: yes
 
 - name: Pulisco
   file:
