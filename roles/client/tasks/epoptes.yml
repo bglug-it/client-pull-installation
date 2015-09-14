@@ -13,6 +13,12 @@
   when: get_epo_srv_name|changed
   changed_when: "'none' not in epo_srv_name.stdout"
 
+- name: Cleanup
+  file:
+    path: /tmp/epoptes-srv
+    state: absent
+  when: get_epo_srv_name|changed
+
 - name: Configuring the client
   lineinfile:
     dest: /etc/default/epoptes-client
@@ -24,8 +30,7 @@
 - name: Checking for an already existent certificate
   file:
     path: /etc/epoptes/server.crt
-    status: file
-  when: epo_srv_name|changed
+    state: file
   register: crt_epo_exists
   ignore_errors: yes
 
@@ -35,9 +40,3 @@
   when: crt_epo_exists|failed
   notify:
     - reboot
-
-- name: Cleanup
-  file:
-    path: /tmp/epoptes-srv
-    state: absent
-  when: get_epo_srv_name|changed
