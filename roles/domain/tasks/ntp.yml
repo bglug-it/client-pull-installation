@@ -26,7 +26,6 @@
     state: present
 
 - name: Restarting NTP service
-  service: 
-    name: ntp
-    state: restarted
+  shell: restart ntp
+  sudo: yes
   when: cfg_ntp|changed

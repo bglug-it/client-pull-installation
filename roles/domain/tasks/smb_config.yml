@@ -16,15 +16,13 @@
     replace: '@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
 
 - name: SAMBA restart
-  service:
-    name: smbd
-    state: restarted
+  shell: restart smbd
+  sudo: yes
   when: cfg_samba|changed
 
 - name: Winbind restart
-  service:
-    name: winbind
-    state: restarted
+  service: restart winbind
+  sudo: yes
   when: cfg_samba|changed
 
 - name: Creating home base
