@@ -5,6 +5,7 @@
   apt:
     name: libpam-winbind
     state: present
+  sudo: yes
 
 # Leaving them here commented, as they may be needed in the future
 # for improvements on login times.

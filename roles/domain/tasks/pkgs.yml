@@ -5,6 +5,7 @@
   apt:
     pkg: '{{ item }}'
     state: present
+  sudo: yes
   with_items:
     - winbind
     - samba

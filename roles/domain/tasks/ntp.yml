@@ -5,6 +5,7 @@
   apt:
     name: ntp
     state: present
+  sudo: yes
 
 - name: Configuring NTP
   template:
