@@ -1,3 +1,5 @@
 ---
 dependencies:
   - { role: prereq }
+  - { role: client }
+  - { role: docenti }
