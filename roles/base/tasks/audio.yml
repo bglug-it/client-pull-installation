@@ -31,7 +31,7 @@
 - name: Copying script to manage users in pulse and pulse-access
   copy:
     src: pulseaudio-perms.sh
-    dest: /var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh
+    dest: '/var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh'
     mode: 0755
     owner: root
     group: root
