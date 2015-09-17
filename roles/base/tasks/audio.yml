@@ -38,7 +38,7 @@
 
 - name: Adding pulseaudio fixing script at reboot.
   lineinfile:
-    line: '@reboot root /var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh'
+    line: '@reboot root /var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh >/dev/null 2>&1'
     dest: /etc/cron.d/pulseaudio-perms
     create: yes
     state: present

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 domaingroup="domain users"
 localgroups="pulse pulse-access"
 
