@@ -9,3 +9,5 @@
 
 - name: Carico le variabili di dominio nel playbook per l'uso
   include_vars: /etc/domain.yml
+  tags:
+    - load_domain_vars
