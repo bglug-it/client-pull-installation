@@ -5,5 +5,16 @@
   template:
     src: sources.list
     dest: /etc/apt/sources.list
-    backup: yes
   when: ansible_product_name != "VirtualBox"
+
+- name: Adding/changing ansible ppa local mirror
+  get_url:
+    url: "http://{{ serverfqdn }}/ks/ansible-ansible-trusty.list"
+    dest: /etc/apt/sources.list.d/ansible-ansible-trusty.list
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_product_name != "VirtualBox"
+
+- name: Updating package database
+  apt: update_cache=yes
