@@ -2,7 +2,7 @@
 # Manages reactivation of pulseaudio as system daemon
 
 - name: "Allowing pulseaudio to run at startup"
-  lineinfile:
+  replace:
     regexp: '^#start on runlevel'
     line: 'start on runlevel [2345]'
     dest: /etc/init/pulseaudio.conf

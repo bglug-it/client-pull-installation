@@ -20,7 +20,7 @@
   when: get_epo_srv_name|changed
 
 - name: Configuring the client
-  lineinfile:
+  replace:
     dest: /etc/default/epoptes-client
     regexp: "^#SERVER=server"
     line: "SERVER={{ epo_srv_name.stdout }}"
