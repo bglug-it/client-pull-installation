@@ -38,5 +38,5 @@
 - name: Authorizing Ansible Management User's key from server
   authorized_key:
     user: amgmt
-    key: "{{ lookup('pipe', 'curl -sSL http://' + serverfqdn + ':3000/mgmtkey') }}"
+    key: "{{ lookup('pipe', 'curl -sSL http://' + ansible_local.domain.serverfqdn + ':3000/mgmtkey') }}"
     state: present
