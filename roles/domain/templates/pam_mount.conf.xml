@@ -13,10 +13,10 @@ processed in a single pass from top-to-bottom
 
   <!-- Volume definitions -->
   <volume user="*" sgrp="domain users" fstype="cifs"
-	  server="{{ server }}" path="%(USER)" mountpoint="~"
+	  server="{{ ansible_local.domain.server }}" path="%(USER)" mountpoint="~"
 	  options="iocharset=utf8,file_mode=0644,dir_mode=0755,cache=strict" />
   <volume user="*" sgrp="domain users" fstype="cifs"
-	  server="{{ server }}" path="shared" mountpoint="~/Condiviso"
+	  server="{{ ansible_local.domain.server }}" path="shared" mountpoint="~/Condiviso"
 	  options="iocharset=utf8,file_mode=0664,dir_mode=0775,cache=strict" />
 
   <!-- pam_mount parameters: General tunables -->

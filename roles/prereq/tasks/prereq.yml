@@ -1,13 +1,33 @@
 ---
 
-- name: Download impostazioni dominio
+- name: Domain settings download
   get_url:
     url: "http://{{ ansible_default_ipv4.gateway }}:3000/domain"
     dest: /etc/domain.yml
     owner: root
     mode: 0644
 
-- name: Carico le variabili di dominio nel playbook per l'uso
-  include_vars: /etc/domain.yml
-  tags:
-    - load_domain_vars
+- name: Creating ansible facts directory
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Assuring python-yaml is installed
+  apt:
+    name: python-yaml
+    state: present
+
+- name: Creating facts.d script for the domain settings
+  copy:
+    src: domain.fact
+    dest: /etc/ansible/facts.d/domain.fact
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Loading domain variables
+  setup:
+    filter: ansible_local

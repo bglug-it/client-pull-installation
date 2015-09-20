@@ -3,7 +3,7 @@
 
 - name: Getting epoptes server name
   get_url:
-    url: "http://{{ serverfqdn }}:3000/epoptes-srv"
+    url: "http://{{ ansible_local.domain.serverfqdn }}:3000/epoptes-srv"
     dest: /tmp/epoptes-srv
   register: get_epo_srv_name
 

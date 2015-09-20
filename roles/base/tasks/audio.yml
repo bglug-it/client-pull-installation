@@ -31,14 +31,14 @@
 - name: Copying script to manage users in pulse and pulse-access
   copy:
     src: pulseaudio-perms.sh
-    dest: '/var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh'
+    dest: '/var/lib/{{ ansible_local.domain.domainfull }}/bin/pulseaudio-perms.sh'
     mode: 0755
     owner: root
     group: root
 
 - name: Adding pulseaudio fixing script at reboot.
   lineinfile:
-    line: '@reboot root /var/lib/{{ domainfull }}/bin/pulseaudio-perms.sh >/dev/null 2>&1'
+    line: '@reboot root /var/lib/{{ ansible_local.domain.domainfull }}/bin/pulseaudio-perms.sh >/dev/null 2>&1'
     dest: /etc/cron.d/pulseaudio-perms
     create: yes
     state: present

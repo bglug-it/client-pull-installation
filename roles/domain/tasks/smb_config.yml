@@ -13,7 +13,7 @@
   replace:
     dest: /etc/apparmor.d/tunables/home
     regexp: '^@\{HOMEDIRS\}=/home/$'
-    replace: '@{HOMEDIRS}=/home/ /home/{{ domainshort }}/'
+    replace: '@{HOMEDIRS}=/home/ /home/{{ ansible_local.domain.domainshort }}/'
 
 - name: SAMBA restart
   shell: restart smbd
@@ -27,7 +27,7 @@
 
 - name: Creating home base
   file:
-    path: '/home/{{ domainshort }}'
+    path: '/home/{{ ansible_local.domain.domainshort }}'
     owner: root
     group: root
     state: directory

@@ -9,7 +9,7 @@
 
 - name: Adding/changing ansible ppa local mirror
   get_url:
-    url: "http://{{ serverfqdn }}/ks/ansible-ansible-trusty.list"
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-ansible-trusty.list"
     dest: /etc/apt/sources.list.d/ansible-ansible-trusty.list
     owner: root
     group: root

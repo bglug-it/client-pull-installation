@@ -33,7 +33,7 @@
 - name: Autorizzo chiave pubblica di amgmt del server
   authorized_key:
     user: vagrant
-    key: "{{ 'http://' + serverfqdn + ':3000/mgmtkey' }}"
+    key: "{{ 'http://' + ansible_local.domain.serverfqdn + ':3000/mgmtkey' }}"
   sudo: yes
 
 - name: Utilizzo il task di cleanup della box, prima di spegnere

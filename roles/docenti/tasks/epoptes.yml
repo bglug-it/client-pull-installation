@@ -4,5 +4,5 @@
 - name: Configuring the Epoptes server
   lineinfile:
     dest: /etc/default/epoptes
-    line: 'SOCKET_GROUP="{{ domainshort }}\docenti"'
+    line: 'SOCKET_GROUP="{{ ansible_local.domain.domainshort }}\docenti"'
     state: present

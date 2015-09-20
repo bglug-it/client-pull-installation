@@ -8,12 +8,12 @@
     state: directory
   with_items:
     - '/usr/lib/firefox/browser/defaults/profile'
-    - '/usr/local/share/ca-certificates/{{ domainfull }}'
+    - '/usr/local/share/ca-certificates/{{ ansible_local.domain.domainfull }}'
 
 - name: Getting SSL transparent proxy certificate
   get_url:
-    url: 'http://{{ serverfqdn }}/proxy.crt'
-    dest: '/usr/local/share/ca-certificates/{{ domainfull }}/ca.crt'
+    url: 'http://{{ ansible_local.domain.serverfqdn }}/proxy.crt'
+    dest: '/usr/local/share/ca-certificates/{{ ansible_local.domain.domainfull }}/ca.crt'
   register: proxycrt_dwnl
 
 - name: Adding certificate sto the ones used by the system
@@ -23,5 +23,5 @@
 
 - name: Firefox settings to include certificate
   get_url:
-    url: 'http://{{ serverfqdn }}/ks/cert8.db'
+    url: 'http://{{ ansible_local.domain.serverfqdn }}/ks/cert8.db'
     dest: /usr/lib/firefox/browser/defaults/profile
