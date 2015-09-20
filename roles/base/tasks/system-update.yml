@@ -2,7 +2,7 @@
 # Manage system upgrade
 
 - name: Updating available packages
-  apt: update_cache=yes
+  apt: update_cache=yes cache_valid_time=180
   sudo: yes
 
 - name: Upgrading system
