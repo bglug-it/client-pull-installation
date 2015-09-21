@@ -4,7 +4,7 @@
 - name: "Allowing pulseaudio to run at startup"
   replace:
     regexp: '^#start on runlevel'
-    line: 'start on runlevel [2345]'
+    replace: 'start on runlevel [2345]'
     dest: /etc/init/pulseaudio.conf
 
 - name: Starting pulseaudio service
