@@ -1,0 +1,7 @@
+---
+# BgLUG customization
+
+- include: custom.yml
+  tags:
+    - custom
+    - bglug
