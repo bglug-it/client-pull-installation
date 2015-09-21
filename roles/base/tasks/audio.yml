@@ -6,7 +6,6 @@
     regexp: '^#start on runlevel'
     line: 'start on runlevel [2345]'
     dest: /etc/init/pulseaudio.conf
-    state: present
 
 - name: Starting pulseaudio service
   service:
