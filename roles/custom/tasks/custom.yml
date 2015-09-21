@@ -15,3 +15,4 @@
   apt:
     name: plymouth-theme-edubuntu-bglug
     state: present
+    force: yes
