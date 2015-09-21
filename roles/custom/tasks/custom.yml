@@ -2,7 +2,7 @@
 
 - name: Adding sys42 repo
   lineinfile:
-    path: /etc/apt/sources.list.d/sys42.list
+    dest: /etc/apt/sources.list.d/sys42.list
     line: 'deb http://bglug.sys42.eu/ubuntu trusty main'
     create: yes
     state: present
