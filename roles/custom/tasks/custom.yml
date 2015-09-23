@@ -26,3 +26,10 @@
     state: present
     force: yes
   sudo: yes
+
+- name: Installing lightdm wallpaper
+  apt:
+    name: bglug-artwork
+    state: present
+    force: yes
+  sudo: yes
