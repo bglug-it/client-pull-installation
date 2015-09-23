@@ -6,6 +6,7 @@ base_common_addpkg:
   - ubuntu-edu-secondary
   - epoptes-client
   - firefox-locale-it
+  - libreoffice-l10n-it
   - libnss-myhostname
 base_common_delpkg:
   - libnss-mdns

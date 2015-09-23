@@ -1,0 +1,28 @@
+---
+
+- name: Checking for installation of ansible
+  apt:
+    name: ansible
+    state: present
+  sudo: yes
+
+- name: Updating ansible-pull custom scripts
+  get_url:
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-pull/{{ item }}"
+    dest: "/var/lib/{{ ansible_local.domain.domainfull }}/bin/{{ item }}"
+    force: yes
+  with_items:
+    - getvaultpass.py
+    - ansible-pull.sh
+
+- name: Updating crontab for ansible-pull
+  get_url:
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-pull/crontab"
+    dest: /etc/cron.d/ansible-pull
+    force: yes
+
+- name: Updating logrotate settings for ansible-pull
+  get_url:
+  url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-pull/logrotate"
+    dest: /etc/logrotate.d/ansible-pull
+    force: yes
