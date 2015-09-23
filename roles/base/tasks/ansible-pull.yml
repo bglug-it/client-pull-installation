@@ -23,6 +23,6 @@
 
 - name: Updating logrotate settings for ansible-pull
   get_url:
-  url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-pull/logrotate"
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/ansible-pull/logrotate"
     dest: /etc/logrotate.d/ansible-pull
     force: yes
