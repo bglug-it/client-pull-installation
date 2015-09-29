@@ -18,7 +18,6 @@ live_repo_hash = ''
 p = Popen("pushd %s >/dev/null; git log --pretty=oneline -1 | cut -d' ' -f 1; popd > /dev/null" % repo_path, shell=True, stdout=PIPE, stderr=STDOUT)
 output = p.communicate()[0]
 live_repo_hash = output.strip()
-repover.close()
 
 live_pkg_hash = ''
 # Recreating pkg checksum
