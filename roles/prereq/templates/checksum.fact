@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-repover.close()
 
 from subprocess import Popen, PIPE, STDOUT
 from os.path import isfile
