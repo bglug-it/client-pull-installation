@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+from os.path import isfile
+from json import dumps
+
+pkgver_file = '/var/lib/{{ ansible_local.domain.domainfull }}/pkg-ver.txt'
+repover_file = '/var/lib/{{ ansible_local.domain.domainfull }}/repo-ver.txt'
+
+local_pkg_hash = ''
+local_repo_hash = ''
+
+if isfile(pkgver_file):
+  local_pkg_hash = open(pkgver_file, 'r').read().strip()
+
+if isfile(repover_file):
+  local_repo_hash = open(repover_file, 'r').read().strip()
+
+retval = {
+  'repover': local_repo_hash,
+  'repover_file': repover_file,
+  'pkgver': local_pkg_hash,
+  'pkgver_file': pkgver_file
+}
+
+print(dumps(retval))

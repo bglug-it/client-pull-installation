@@ -28,6 +28,14 @@
     group: root
     mode: 0755
 
+- name: Creating facts.d script for repo/pkg versions
+  template:
+    src: checksum.fact
+    dest: /etc/ansible/facts.d/checksum.fact
+    mode: 0755
+    owner: root
+    group: root
+
 - name: Loading domain variables
   setup:
     filter: ansible_local
