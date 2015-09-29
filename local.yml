@@ -5,6 +5,7 @@
   vars_files:
     - domainpwd.vault
   roles:
+    - checkver
     - init
     - base
     - custom

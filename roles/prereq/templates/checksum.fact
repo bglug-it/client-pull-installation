@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from os import popen
+from subprocess import Popen, PIPE, STDOUT
 from os.path import isfile
 from json import dumps, loads
 from hashlib import md5
@@ -15,8 +15,9 @@ local_repo_hash = ''
 
 live_repo_hash = ''
 # Getting live versions for repo
-repover = popen("pushd %s >/dev/null; git log --pretty=oneline -1 | cut -d' ' -f 1; popd > /dev/null" % repo_path)
-live_repo_hash = repover.read().strip()
+p = Popen("pushd %s >/dev/null; git log --pretty=oneline -1 | cut -d' ' -f 1; popd > /dev/null" % repo_path, shell=True, stdout=PIPE, stderr=STDOUT)
+output = p.communicate()[0]
+live_repo_hash = output.strip()
 repover.close()
 
 live_pkg_hash = ''
