@@ -1,13 +1,31 @@
 #!/usr/bin/env python
 
+from os import popen
 from os.path import isfile
-from json import dumps
+from json import dumps, loads
+from hashlib import md5
+import requests
 
+repo_path = '/var/lib/{{ ansible_local.domain.domainfull }}/config'
 pkgver_file = '/var/lib/{{ ansible_local.domain.domainfull }}/pkg-ver.txt'
 repover_file = '/var/lib/{{ ansible_local.domain.domainfull }}/repo-ver.txt'
 
 local_pkg_hash = ''
 local_repo_hash = ''
+
+live_repo_hash = ''
+# Getting live versions for repo
+repover = popen("pushd %s >/dev/null; git log --pretty=oneline -1 | cut -d' ' -f 1; popd > /dev/null" % repo_path)
+live_repo_hash = repover.read().strip()
+repover.close()
+
+live_pkg_hash = ''
+# Recreating pkg checksum
+r = requests.get("http://%s:3000/ansible_host" % '{{ ansible_local.domain.serverfqdn }}')
+if r.status_code == 200:
+  response = loads(r.text)
+  retval = response['addpkg'].sort() + response['delpkg'].sort()
+  live_pkg_hash = md5("".join(retval)).hexdigest()
 
 if isfile(pkgver_file):
   local_pkg_hash = open(pkgver_file, 'r').read().strip()
@@ -16,8 +34,10 @@ if isfile(repover_file):
   local_repo_hash = open(repover_file, 'r').read().strip()
 
 retval = {
+  'live_repover': live_repo_hash,
   'repover': local_repo_hash,
   'repover_file': repover_file,
+  'live_pkgver': live_pkg_hash,
   'pkgver': local_pkg_hash,
   'pkgver_file': pkgver_file
 }
