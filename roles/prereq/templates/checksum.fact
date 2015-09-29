@@ -22,8 +22,8 @@ live_pkg_hash = ''
 # Recreating pkg checksum
 r = requests.get("http://%s:3000/ansible_host" % '{{ ansible_local.domain.serverfqdn }}')
 if r.status_code == 200:
-  response = loads(r.text)
-  retval = response['addpkg'].sort() + response['delpkg'].sort()
+  response = loads(r.text.encode('ascii', 'ignore'))
+  retval = sorted(response['addpkg']) + sorted(response['delpkg'])
   live_pkg_hash = md5("".join(retval)).hexdigest()
 
 if isfile(pkgver_file):
