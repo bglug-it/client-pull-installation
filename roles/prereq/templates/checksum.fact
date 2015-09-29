@@ -16,8 +16,7 @@ local_repo_hash = ''
 
 live_repo_hash = ''
 # Getting live versions for repo
-p = Popen("bash -c \"pushd %s >/dev/null; git log --pretty=oneline -1 | cut
-    -d' ' -f 1; popd > /dev/null\"" % repo_path, shell=True, stdout=PIPE, stderr=STDOUT)
+p = Popen("bash -c \"pushd %s >/dev/null; git log --pretty=oneline -1 | cut -d' ' -f 1; popd > /dev/null\"" % repo_path, shell=True, stdout=PIPE, stderr=STDOUT)
 live_repo_hash = p.communicate()[0].strip()
 
 live_pkg_hash = ''
