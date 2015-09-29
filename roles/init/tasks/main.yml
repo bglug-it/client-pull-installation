@@ -1,6 +1,5 @@
 ---
 
 - include: init.yml
-  when: live_repover != ansible_local.checksum.repover
   tags:
     - init
