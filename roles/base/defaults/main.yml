@@ -4,7 +4,6 @@ base_common_addpkg:
   - screen
   - cifs-utils
   - ubuntu-edu-secondary
-  - epoptes-client
   - firefox-locale-it
   - libreoffice-l10n-it
   - libnss-myhostname
@@ -13,9 +12,11 @@ base_common_delpkg:
   - unity-webapps-common
   - zeitgeist-core
   - zeitgeist-datahub
-base_client_addpkg: []
+base_client_addpkg:
+  - epoptes-client
 base_client_delpkg:
   - epoptes
 base_docenti_addpkg:
   - epoptes
-base_docenti_delpkg: []
+base_docenti_delpkg:
+  - epoptes-client
