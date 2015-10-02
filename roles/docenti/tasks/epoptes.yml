@@ -6,3 +6,21 @@
     dest: /etc/default/epoptes
     line: 'SOCKET_GROUP="{{ ansible_local.domain.domainshort }}\docenti"'
     state: present
+
+- name: Disabling sysv start
+  shell: update-rc.d -f epoptes remove
+  sudo: yes
+
+- name: Installing upstart service
+  copy:
+    src: epoptes.conf
+    dest: /etc/init/epoptes.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure to start the service
+  service:
+    name: epoptes
+    state: started
+  sudo: yes
