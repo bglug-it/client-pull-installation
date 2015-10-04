@@ -28,7 +28,7 @@
 
 - name: Adding pulseaudio fixing script at reboot.
   lineinfile:
-  line: '@reboot root curl -sSL http://{{ ansible_local.domain.serverfqdn }}/ks/preseed/pulseaudio-perms.sh | bash >/dev/null 2>&1'
+    line: '@reboot root curl -sSL http://{{ ansible_local.domain.serverfqdn }}/ks/preseed/pulseaudio-perms.sh | bash >/dev/null 2>&1'
     dest: /etc/cron.d/pulseaudio-perms
     create: yes
     state: present
