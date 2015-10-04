@@ -3,10 +3,10 @@
 # At the end of system configuration, we should have a complete
 # Edubuntu system
 
-- include: ansible-pull.yml
-  tags:
-    - base
-    - ansible-pull
+#- include: ansible-pull.yml
+#  tags:
+#    - base
+#    - ansible-pull
 
 - include: apt-sources.yml
   tags:
