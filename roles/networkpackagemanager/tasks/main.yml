@@ -2,6 +2,9 @@
 # Managing installation/deletion of packages set with NetworkPackageManager
 # within NethServer console
 
+- name: Updating package cache.
+  apt: update_cache=yes cache_valid_time=180
+
 - name: Installing packages for specific role from NetworkPackageManager
   apt:
     name: '{{ item }}'
@@ -15,3 +18,7 @@
     state: absent
     purge: yes
   with_items: "{{ delpkg }}"
+
+- name: Updating local hash for packages
+  shell: 'rm -f {{ ansible_local.checksum.pkgver_file }} && echo "{{ ansible_local.checksum.pkgver }}" > {{ ansible_local.checksum.pkgver_file }}'
+  sudo: yes

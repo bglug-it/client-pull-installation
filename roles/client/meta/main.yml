@@ -1,3 +1,0 @@
----
-dependencies:
-  - { role: networkpackagemanager, tags: [ 'npm', 'networkpackagemanager' ] }

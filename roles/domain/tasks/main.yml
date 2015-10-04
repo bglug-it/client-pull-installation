@@ -51,3 +51,7 @@
   tags:
     - domain
     - join
+
+- name: Updating local version for repo
+  shell: 'rm -f {{ ansible_local.checksum.repover_file }} && echo "{{ ansible_local.checksum.repover }}" > {{ ansible_local.checksum.repover_file }}'
+  sudo: yes

@@ -23,7 +23,7 @@ live_pkg_hash = ''
 r = requests.get("http://%s:3000/ansible_host" % '{{ ansible_local.domain.serverfqdn }}')
 if r.status_code == 200:
   response = loads(r.text.encode('ascii', 'ignore'))
-  retval = sorted(response['addpkg']) + sorted(response['delpkg'])
+  retval = sorted(response['addpkg']) + [ '-' ] + sorted(response['delpkg'])
   live_pkg_hash = md5("".join(retval)).hexdigest()
 
 if isfile(pkgver_file):
@@ -32,12 +32,22 @@ if isfile(pkgver_file):
 if isfile(repover_file):
   local_repo_hash = open(repover_file, 'r').read().strip()
 
+pkg_needed = False
+repo_needed = False
+
+# Determining if run for packages and for configuraton has to be done
+if local_pkg_hash != live_pkg_hash:
+  pkg_needed = True
+
+if local_repo_hash != live_repo_hash:
+  repo_needed = True
+
 retval = {
-  'live_repover': live_repo_hash,
-  'repover': local_repo_hash,
+  'needs_repo_run': repo_needed,
+  'repover': live_repo_hash,
   'repover_file': repover_file,
-  'live_pkgver': live_pkg_hash,
-  'pkgver': local_pkg_hash,
+  'needs_pkg_run': pkg_needed,
+  'pkgver': live_pkg_hash,
   'pkgver_file': pkgver_file
 }
 
