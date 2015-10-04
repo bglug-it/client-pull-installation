@@ -37,5 +37,7 @@
   shell: /usr/sbin/epoptes-client -c
   sudo: yes
   when: crt_epo_exists|failed
-  notify:
-    - reboot
+  # I don't notify anymore, hoping that this would be done on first run after
+  # preseed and it should restart because of domain join.
+  #notify:
+  #  - reboot
