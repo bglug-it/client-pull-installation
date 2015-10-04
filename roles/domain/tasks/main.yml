@@ -11,6 +11,11 @@
     - domain
     - nss
 
+- include: audio.yml
+  tags:
+    - domain
+    - audio
+
 - include: gui-changes.yml
   tags:
     - domain
