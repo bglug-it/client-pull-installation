@@ -5,7 +5,7 @@
   vars_files:
     - domainpwd.vault
   roles:
-    - { role: networkpackagemanager, when: 'ansible_local.checksum.needs_pkg_run' }
-    - { role: init, when: 'ansible_local.checksum.needs_repo_run' }
-    - { role: custom, when: 'ansible_local.checksum.needs_repo_run' }
-    - { role: domain, when: 'ansible_local.checksum.needs_repo_run' }
+    - { role: networkpackagemanager, when: 'ansible_local.checksum.needs_pkg_run | bool' }
+    - { role: init, when: 'ansible_local.checksum.needs_repo_run | bool' }
+    - { role: custom, when: 'ansible_local.checksum.needs_repo_run | bool' }
+    - { role: domain, when: 'ansible_local.checksum.needs_repo_run | bool' }
