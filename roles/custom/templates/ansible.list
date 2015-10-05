@@ -1,0 +1,2 @@
+## Ansible Official PPA
+deb http://{{ ansible_local.domain.mirrorpath }}ppa.launchpad.net/ansible/ansible/ubuntu trusty main

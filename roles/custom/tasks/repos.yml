@@ -1,0 +1,27 @@
+---
+# Fixing all the stuff around repositories.
+
+# Provide a clean and ordered sources.list
+- name: Replace sources.list with a clean one.
+  template:
+    src: sources.list
+    dest: /etc/apt/sources.list
+
+- name: Adding Ansible repo
+  template:
+    src: ansible.list
+    dest: /etc/apt/sources.list.d/ansible.list
+
+- name: Adding LibreOffice repo
+  template:
+    src: libreoffice.list
+    dest: /etc/apt/sources.list.d/libreoffice.list 
+
+- name: Adding BgLUG repo
+  template:
+    src: sys42.list
+    dest: /etc/apt/sources.list.d/sys42.list
+
+- name: Regenerating package cache
+  apt: update_cache=yes
+  sudo: yes

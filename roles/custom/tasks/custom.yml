@@ -1,16 +1,5 @@
 ---
 
-- name: Adding mirrored sys42 repo
-  lineinfile:
-    dest: /etc/apt/sources.list.d/sys42.list
-    line: 'deb http://{{ ansible_local.domain.mirrorpath }}bglug.sys42.eu/ubuntu trusty main'
-    create: yes
-    state: present
-
-- name: Reloading available packages
-  apt:
-    update_cache: yes
-
 - name: Installing plymouth theme
   apt:
     name: plymouth-theme-edubuntu-bglug
