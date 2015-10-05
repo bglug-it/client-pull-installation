@@ -15,7 +15,7 @@
     state: present
   sudo: yes
 
-  - name: Ensure update-notifier-common is installed
+- name: Ensure update-notifier-common is installed
   apt:
     name: update-notifier-common
     state: present
