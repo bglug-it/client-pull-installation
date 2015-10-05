@@ -1,20 +1,11 @@
 ---
 
-- name: Adding sys42 repo
-  lineinfile:
-    dest: /etc/apt/sources.list.d/sys42.list
-    line: 'deb http://bglug.sys42.eu/ubuntu trusty main'
-    create: yes
-    state: present
-  when: ansible_product_name == 'VirtualBox'
-
 - name: Adding mirrored sys42 repo
   lineinfile:
     dest: /etc/apt/sources.list.d/sys42.list
     line: 'deb http://{{ ansible_local.domain.mirrorpath }}bglug.sys42.eu/ubuntu trusty main'
     create: yes
     state: present
-  when: ansible_product_name != 'VirtualBox'
 
 - name: Reloading available packages
   apt:

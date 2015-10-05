@@ -1,0 +1,32 @@
+---
+
+- name: Adding proposed sources to apt/sources.list
+  lineinfile:
+    line: "{{ item }}"
+    dest: /etc/apt/sources.list
+  with_items:
+    - "deb http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu/ trusty-proposed restricted main multiverse universe"
+    - "deb-src http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu/ trusty-proposed restricted main multiverse universe"
+  sudo: yes
+
+- name: Ensure unattended-upgrades is installed
+  apt:
+    name: unattended-upgrades
+    state: present
+  sudo: yes
+
+  - name: Ensure update-notifier-common is installed
+  apt:
+    name: update-notifier-common
+    state: present
+  sudo: yes
+
+- name: Configuring unattended upgrades from file
+  copy:
+    src: 50-unattended-upgrades
+    dest: /etc/apt/apt.conf.d/50-unattended-upgrades
+
+- name: Activating automatic updates
+  copy:
+    src: 20-auto-upgrades
+    dest: /etc/apt/apt.conf.d/20-auto-upgrades
