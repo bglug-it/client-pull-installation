@@ -15,7 +15,14 @@
     backup: yes
   register: cfg_glib_mounted
 
+- name: Fixing keyboard layout
+  copy:
+    src: org.freedesktop.ibus.general.gschema.override
+    dest: /usr/share/glib-2.0/schemas/org.freedesktop.ibus.general.schema.override
+    backup: yes
+  register: cfg_keyb_layout
+
 - name: Recompiling glib2 schemas
   shell: glib-compile-schemas --strict /usr/share/glib-2.0/schemas/
   sudo: yes
-  when: cfg_glib_users|changed or cfg_glib_mounted|changed
+  when: cfg_glib_users|changed or cfg_glib_mounted|changed or cfg_keyb_layout|changed
