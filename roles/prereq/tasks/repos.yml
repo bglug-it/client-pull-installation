@@ -21,7 +21,3 @@
   template:
     src: sys42.list
     dest: /etc/apt/sources.list.d/sys42.list
-
-- name: Regenerating package cache
-  apt: update_cache=yes
-  sudo: yes

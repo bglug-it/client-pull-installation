@@ -1,11 +1,6 @@
 ---
 # BgLUG customization
 
-- include: repos.yml
-  tags:
-    - custom
-    - repos
-
 - include: unattended-upgrades.yml
   tags:
     - custom
