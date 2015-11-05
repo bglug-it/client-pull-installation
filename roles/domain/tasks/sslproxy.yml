@@ -24,4 +24,4 @@
 - name: Firefox settings to include certificate
   get_url:
     url: 'http://{{ ansible_local.domain.serverfqdn }}/ks/server-ca/cert8.db'
-    dest: /usr/lib/firefox/browser/defaults/profile
+    dest: /usr/lib/firefox/browser/defaults/profile/cert8.db

@@ -1,19 +1,19 @@
 # Base
-deb http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty main restricted universe multiverse
-deb-src http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty main restricted universe multiverse
+deb http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty main restricted universe multiverse
+deb-src http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty main restricted universe multiverse
 
 # updates
-deb http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty-updates main restricted universe multiverse
-deb-src http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty-updates main restricted universe multiverse
+deb http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty-updates main restricted universe multiverse
+deb-src http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty-updates main restricted universe multiverse
 
 # backports
-deb http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse
-deb-src http://{{ ansible_local.domain.mirrorpath }}archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse
+deb http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse
+deb-src http://{{ execmirrorpath }}archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse
 
 # security
-deb http://{{ ansible_local.domain.mirrorpath }}security.ubuntu.com/ubuntu trusty-security main restricted universe multiverse
-deb-src http://{{ ansible_local.domain.mirrorpath }}security.ubuntu.com/ubuntu trusty-security main restricted universe multiverse
+deb http://{{ execmirrorpath }}security.ubuntu.com/ubuntu trusty-security main restricted universe multiverse
+deb-src http://{{ execmirrorpath }}security.ubuntu.com/ubuntu trusty-security main restricted universe multiverse
 
 # extras
-deb http://{{ ansible_local.domain.mirrorpath }}extras.ubuntu.com/ubuntu trusty main
-deb-src http://{{ ansible_local.domain.mirrorpath }}extras.ubuntu.com/ubuntu trusty main
+deb http://{{ execmirrorpath }}extras.ubuntu.com/ubuntu trusty main
+deb-src http://{{ execmirrorpath }}extras.ubuntu.com/ubuntu trusty main

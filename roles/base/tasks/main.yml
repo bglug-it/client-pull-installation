@@ -3,10 +3,7 @@
 # At the end of system configuration, we should have a complete
 # Edubuntu system
 
-#- include: ansible-pull.yml
-#  tags:
-#    - base
-#    - ansible-pull
+# Requires fact execmirrorpath, already set by prereq role.
 
 - include: apt-sources.yml
   tags:

@@ -1,2 +1,2 @@
 # BgLUG repo @ sys42
-deb http://{{ ansible_local.domain.mirrorpath }}bglug.sys42.eu/ubuntu trusty main
+deb http://{{ execmirrorpath }}bglug.sys42.eu/ubuntu trusty main
