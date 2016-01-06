@@ -1,0 +1,11 @@
+---
+
+- name: Configuring sudo to accept users other than local admin
+  copy:
+    src: polkit-1.txt
+    dest: /etc/policykit-1/localauthority.conf.d/51-ubuntu-admin.conf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  sudo: yes

@@ -6,3 +6,6 @@
 
 - include: glib2.yml
   tags: glib2
+
+- include: policykit-1.yml
+  tags: policykit
