@@ -7,13 +7,13 @@
   register: check_edubuntu_pkg
   changed_when: check_edubuntu_pkg.rc != 0
   tags: edu-install
-  sudo: yes
+  become: yes
 
 - name: Installation of the desktop environment
   shell: "DEBIAN_FRONTEND=noninteractive /usr/bin/apt-get -y install edubuntu-desktop-gnome^"
   when: check_edubuntu_pkg|changed
   tags: edu-install
-  sudo: yes
+  become: yes
 
 - name: Change default desktop environment
   replace:

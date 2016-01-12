@@ -17,12 +17,12 @@
 
 - name: SAMBA restart
   shell: restart smbd
-  sudo: yes
+  become: yes
   when: cfg_samba|changed
 
 - name: Winbind restart
   shell: restart winbind
-  sudo: yes
+  become: yes
   when: cfg_samba|changed
 
 - name: Creating home base

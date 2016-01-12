@@ -2,44 +2,59 @@
 # Management of packages
 
 - name: Removing packages commonly not required
-  apt: pkg={{ item }} state=absent purge=yes
+  apt:
+    pkg: '{{ item }}'
+    state: absent
+    purge: yes
   with_items: "{{ base_common_delpkg }}"
-  sudo: yes
+  become: yes
 
 - name: Removing packages from client machines
-  apt: pkg={{ item }} state=absent purge=yes
+  apt:
+    pkg: '{{ item }}'
+    state: absent
+    purge: yes
   with_items: "{{ base_client_delpkg }}"
-  sudo: yes
+  become: yes
   when: role == 'client' and base_client_delpkg|length > 0
 
 - name: Removing packages from docenti machines
-  apt: pkg={{ item }} state=absent purge=yes
+  apt:
+    pkg: '{{ item }}'
+    state: absent
+    purge: yes
   with_items: "{{ base_docenti_delpkg }}"
-  sudo: yes
+  become: yes
   when: role == 'docenti' and base_docenti_delpkg|length > 0
 
 - name: Cleanup of unneeded packages
   shell: apt-get -y autoremove
   register: autoremove
   changed_when: "'Rimozione' in autoremove.stdout"
-  sudo: yes
+  become: yes
 
 - name: Installing additional common packages
-  apt: pkg={{ item }} state=installed
+  apt:
+    pkg: '{{ item }}'
+    state: installed
   with_items: "{{ base_common_addpkg }}"
   tags: edu-install
-  sudo: yes
+  become: yes
 
 - name: Installing additional packages for client role
-  apt: pkg={{ item }} state=present
+  apt:
+    pkg: '{{ item }}'
+    state: present
   with_items: "{{ base_client_addpkg }}"
-  sudo: yes
+  become: yes
   when: role == 'client' and base_client_addpkg|length > 0
 
 - name: Installing additional packages for docenti role
-  apt: pkg={{ item }} state=present
+  apt:
+    pkg: '{{ item }}'
+    state: present
   with_items: "{{ base_docenti_addpkg }}"
-  sudo: yes
+  become: yes
   when: role == 'docenti' and base_docenti_addpkg|length > 0
 
 - name: Correggo NetworkManager per gestire la rete

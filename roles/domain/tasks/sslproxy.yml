@@ -19,7 +19,7 @@
 - name: Adding certificate sto the ones used by the system
   shell: update-ca-certificates
   when: proxycrt_dwnl|changed
-  sudo: yes
+  become: yes
 
 - name: Firefox settings to include certificate
   get_url:

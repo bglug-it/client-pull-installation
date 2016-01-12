@@ -4,7 +4,7 @@
   apt:
     name: ansible
     state: present
-  sudo: yes
+  become: yes
 
 - name: Updating ansible-pull custom scripts
   get_url:

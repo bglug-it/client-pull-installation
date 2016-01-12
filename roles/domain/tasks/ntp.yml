@@ -5,7 +5,7 @@
   apt:
     name: ntp
     state: present
-  sudo: yes
+  become: yes
 
 - name: Configuring NTP
   template:
@@ -27,5 +27,5 @@
 
 - name: Restarting NTP service
   shell: service ntp restart
-  sudo: yes
+  become: yes
   when: cfg_ntp|changed

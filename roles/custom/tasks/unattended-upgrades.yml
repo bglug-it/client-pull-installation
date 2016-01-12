@@ -4,7 +4,7 @@
   apt:
     name: "{{ item }}"
     state: present
-  sudo: yes
+  become: yes
   with_items:
     - unattended-upgrades
     - update-notifier-common

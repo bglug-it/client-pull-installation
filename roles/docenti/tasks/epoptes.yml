@@ -9,7 +9,7 @@
 
 - name: Disabling sysv start
   shell: update-rc.d -f epoptes remove
-  sudo: yes
+  become: yes
 
 - name: Installing upstart service
   copy:
@@ -23,4 +23,4 @@
   service:
     name: epoptes
     state: started
-  sudo: yes
+  become: yes
