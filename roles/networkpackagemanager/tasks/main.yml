@@ -5,13 +5,18 @@
 - name: Updating package cache.
   apt: update_cache=yes cache_valid_time=180
 
+- name: Defining new variable to manage additional packages
+  set_fact:
+    str_addpkg: "{{ addpkg|join(' ')|trim != '' }}"
+    str_delpkg: "{{ delpkg|join(' ')|trim != '' }}"
+
 - name: Installing packages for specific role from NetworkPackageManager
   apt:
     name: '{{ item }}'
     state: present
   become: yes
   with_items: "{{ addpkg }}"
-  when: addpkg|join(' ')|trim != ''
+  when: str_addpkg
 
 - name: Removing packages for specific role from NetworkPackageManager
   apt:
@@ -19,7 +24,7 @@
     state: absent
     purge: yes
   with_items: "{{ delpkg }}"
-  when: delpkg|join(' ')|trim != ''
+  when: str_delpkg
 
 - name: Updating local hash for packages
   shell: 'rm -f {{ ansible_local.checksum.pkgver_file }} && echo "{{ ansible_local.checksum.pkgver }}" > {{ ansible_local.checksum.pkgver_file }}'
