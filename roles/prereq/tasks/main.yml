@@ -1,11 +1,9 @@
 ---
 
-- debug: var=hostvars
-
-- include: mirror-config.yml
+- include: prereq.yml
   tags: prereq
 
-- include: prereq.yml
+- include: mirror-config.yml
   tags: prereq
 
 - include: repos.yml
