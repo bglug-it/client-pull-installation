@@ -12,10 +12,9 @@ args=parser.parse_args()
 
 # Simplifying, since we haven't already installed domain.yml, we assume to use
 # default gateway IP.
-gwt=popen("ip route show | grep ^default")
-data=gwt.read()
+gwt=popen("ip route show | grep ^default | awk '{ print $3 }'")
+srv=gwt.read().strip()
 gwt.close()
-srv=data.split()[2]
 
 if args.list:
   r = requests.get("http://" + srv + ":3000/ansible_list")
