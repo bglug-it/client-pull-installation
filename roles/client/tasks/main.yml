@@ -1,7 +1,7 @@
 ---
 # Managing actions for role 'client'
 
-- debug: var=role
+- debug: var=hostvars['localhost']['role']
 
 - include: epoptes.yml
   when: "{{ role }} == 'client'"
