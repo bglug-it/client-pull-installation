@@ -3,7 +3,7 @@
 # At the end of system configuration, we should have a complete
 # Edubuntu system
 
-# Requires fact execmirrorpath, already set by prereq role.
+# Requires fact execpath, already set by prereq role.
 
 - include: apt-sources.yml
   tags:
