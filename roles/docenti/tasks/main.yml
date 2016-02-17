@@ -2,7 +2,7 @@
 # Managing actions for role 'docenti'
 
 - include: epoptes.yml
-  when: "role == 'docenti'"
+  when: hostvars.localhost.role == 'docenti'
   tags:
     - role
     - docenti
