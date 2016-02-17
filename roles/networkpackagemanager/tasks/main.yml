@@ -11,7 +11,7 @@
     state: present
   become: yes
   with_items: "{{ hostvars.localhost.addpkg }}"
-  when: hostvars.localhost.addpkg|join(' ')|trim != ''
+  when: hostvars.localhost.addpkg is defined and hostvars.localhost.addpkg|join(' ')|trim != ''
 
 - name: Removing packages for specific role from NetworkPackageManager
   apt:
@@ -19,7 +19,7 @@
     state: absent
     purge: yes
   with_items: "{{ hostvars.localhost.delpkg }}"
-  when: hostvars.localhost.delpkg|join(' ')|trim != ''
+  when: hostvars.localhost.delpkg is defined and hostvars.localhost.delpkg|join(' ')|trim != ''
 
 - name: Updating local hash for packages
   shell: 'rm -f {{ ansible_local.checksum.pkgver_file }} && echo "{{ ansible_local.checksum.pkgver }}" > {{ ansible_local.checksum.pkgver_file }}'
