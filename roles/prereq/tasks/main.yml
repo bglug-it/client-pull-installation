@@ -1,5 +1,7 @@
 ---
 
+- debug: var=hostvars
+
 - include: mirror-config.yml
   tags: prereq
 
