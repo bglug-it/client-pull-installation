@@ -16,7 +16,7 @@
     dest: '/usr/local/share/ca-certificates/{{ ansible_local.domain.domainfull }}/ca.crt'
   register: proxycrt_dwnl
 
-- name: Adding certificate sto the ones used by the system
+- name: Adding certificates to the ones used by the system
   shell: update-ca-certificates
   when: proxycrt_dwnl|changed
   become: yes
