@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+
+from urllib import urlopen
+from yaml import load
+from json import dumps
+
+with urlopen('http://' + {{ ansible_local.domain.serverfqdn }} + ':3000/ansible_host?host=localhost') as file:
+  print(dumps(load(file)))

@@ -2,7 +2,7 @@
 # Managing actions for role 'docenti'
 
 - include: epoptes.yml
-  when: hostvars.localhost.role == 'docenti'
+  when: ansible_local.noderole.role == 'docenti'
   tags:
     - role
     - docenti

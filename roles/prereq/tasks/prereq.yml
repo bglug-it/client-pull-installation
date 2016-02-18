@@ -39,5 +39,13 @@
     owner: root
     group: root
 
+- name: Creating facts.d script for node role
+  template:
+    src: noderole.fact
+    dest: /etc/ansible/facts.d/noderole.fact
+    mode: 0755
+    owner: root
+    group: root
+
 - name: Loading repo/pkg versions
   setup: filter=ansible_local

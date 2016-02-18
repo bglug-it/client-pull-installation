@@ -2,7 +2,7 @@
 # Managing actions for role 'client'
 
 - include: epoptes.yml
-  when: hostvars.localhost.role == 'client'
+  when: ansible_local.noderole.role == 'client'
   tags:
     - role
     - client
