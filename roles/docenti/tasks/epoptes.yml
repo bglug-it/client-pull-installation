@@ -23,4 +23,5 @@
   service:
     name: epoptes
     state: started
+    enabled: yes
   become: yes
