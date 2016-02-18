@@ -8,7 +8,7 @@
     state: present
 
 - name: Disabling sysv start
-  shell: update-rc.d -f epoptes remove
+  shell: /usr/sbin/update-rc.d -f epoptes remove
   become: yes
 
 - name: Installing upstart service
