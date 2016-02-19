@@ -5,9 +5,11 @@
     name: plymouth-theme-edubuntu-bglug
     state: present
     force: yes
+  become: yes
 
 - name: Installing lightdm wallpaper
   apt:
     name: bglug-artwork
     state: present
     force: yes
+  become: yes

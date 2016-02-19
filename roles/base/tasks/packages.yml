@@ -7,6 +7,7 @@
     state: absent
     purge: yes
   with_items: "{{ base_common_delpkg }}"
+  become: yes
 
 - name: Removing packages from client machines
   apt:
@@ -15,6 +16,7 @@
     purge: yes
   with_items: "{{ base_client_delpkg }}"
   when: ansible_local.noderole.role == 'client' and base_client_delpkg|length > 0
+  become: yes
 
 - name: Removing packages from docenti machines
   apt:
@@ -23,11 +25,13 @@
     purge: yes
   with_items: "{{ base_docenti_delpkg }}"
   when: ansible_local.noderole.role == 'docenti' and base_docenti_delpkg|length > 0
+  become: yes
 
 - name: Cleanup of unneeded packages
   shell: apt-get -y autoremove
   register: autoremove
   changed_when: "'Rimozione' in autoremove.stdout"
+  become: yes
 
 - name: Installing additional common packages
   apt:
@@ -35,6 +39,7 @@
     state: installed
   with_items: "{{ base_common_addpkg }}"
   tags: edu-install
+  become: yes
 
 - name: Installing additional packages for client role
   apt:
@@ -42,6 +47,7 @@
     state: present
   with_items: "{{ base_client_addpkg }}"
   when: ansible_local.noderole.role == 'client' and base_client_addpkg|length > 0
+  become: yes
 
 - name: Installing additional packages for docenti role
   apt:
@@ -49,6 +55,7 @@
     state: present
   with_items: "{{ base_docenti_addpkg }}"
   when: ansible_local.noderole.role == 'docenti' and base_docenti_addpkg|length > 0
+  become: yes
 
 - name: Correggo NetworkManager per gestire la rete
   lineinfile:

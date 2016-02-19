@@ -18,3 +18,4 @@
 
 - name: Updating package database
   apt: update_cache=yes
+  become: yes

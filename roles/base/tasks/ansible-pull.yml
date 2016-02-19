@@ -4,6 +4,7 @@
   apt:
     name: ansible
     state: present
+  become: yes
 
 - name: Updating ansible-pull custom scripts
   get_url:
