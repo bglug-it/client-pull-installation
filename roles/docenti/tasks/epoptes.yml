@@ -7,6 +7,10 @@
     line: 'SOCKET_GROUP="{{ ansible_local.domain.domainshort }}\docenti"'
     state: present
 
+- name: Stopping epoptes SysV daemon
+  shell: /etc/init.d/epoptes stop
+  become: yes
+
 - name: Disabling sysv start
   shell: /usr/sbin/update-rc.d -f epoptes remove
   become: yes
@@ -19,9 +23,6 @@
     group: root
     mode: 0644
 
-- name: Ensure to start the service
-  service:
-    name: epoptes
-    state: started
-    enabled: yes
+- name: Starting epoptes from upstart
+  shell: /sbin/start epoptes
   become: yes
