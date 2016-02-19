@@ -3,14 +3,12 @@
 
 - name: Checking domain join
   shell: wbinfo -t
-  become: yes
   register: check_domain
   changed_when: check_domain.rc != 0
   ignore_errors: yes
 
 - name: Joining domain
   shell: 'net rpc join -U admin%{{ domainadminpasswd }}'
-  become: yes
   when: check_domain|changed
   register: domainjoin
   notify:

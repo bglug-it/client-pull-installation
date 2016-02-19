@@ -5,9 +5,7 @@
   apt:
     update_cache: yes
     cache_valid_time: 180
-  become: yes
 
 - name: Upgrading system
   apt:
     upgrade: full
-  become: yes

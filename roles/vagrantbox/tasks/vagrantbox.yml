@@ -9,7 +9,6 @@
     shell: /bin/bash
     state: present
     generate_ssh_key: yes
-  become: yes
 
 - name: Concessione diritti sudo all'utente vagrant
   lineinfile:
@@ -22,19 +21,16 @@
     create: yes
     state: present
     validate: '/usr/sbin/visudo -cf %s'
-  become: yes
 
 - name: Autorizzo chiave pubblica insicura per vagrant
   authorized_key:
     user: vagrant
     key: "http://sys42.eu/downloads/vagrant.pub"
-  become: yes
 
 - name: Autorizzo chiave pubblica di amgmt del server
   authorized_key:
     user: vagrant
     key: "{{ 'http://' + ansible_local.domain.serverfqdn + ':3000/mgmtkey' }}"
-  become: yes
 
 - name: Utilizzo il task di cleanup della box, prima di spegnere
   shell: curl -s http://sys42.eu/downloads/box-cleanup.sh | sudo bash

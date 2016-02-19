@@ -5,7 +5,6 @@
   apt:
     name: libpam-winbind
     state: present
-  become: yes
 
 # Leaving them here commented, as they may be needed in the future
 # for improvements on login times.
@@ -17,14 +16,12 @@
 #    dest: /etc/pam.d/common-auth
 #    regexp: '^.*pam_unix\.so.*nullok_secure$'
 #    replace: 'auth [success=1 default=ignore] pam_unix.so nullok_secure try_first_pass'
-#  become: yes
 #
 #- name: 'common-auth: rimuovo config auto pam_winbind'
 #  lineinfile:
 #    dest: /etc/pam.d/common-auth
 #    regexp: 'pam_winbind\.so krb5'
 #    state: absent
-#  become: yes
 #
 #- name: 'common-auth: aggiunta pam_winbind'
 #  lineinfile:
@@ -33,7 +30,6 @@
 #    insertbefore: '^auth.*pam_unix\.so'
 #    line: 'auth [success=2 default=ignore] pam_winbind.so'
 #    state: present
-#  become: yes
 
 ## common-password
 #
@@ -43,7 +39,6 @@
 #    regexp: '^(password.*pam_unix\.so.*sha512)$'
 #    replace: '\1 min=4 max=20'
 #    backup: yes
-#  become: yes
 #
 ## common-session
 #
@@ -55,4 +50,3 @@
 #    line: 'session required pam_mkhomedir.so umask=0022 skel=/etc/skel silent'
 #    state: present
 #    backup: yes
-#  become: yes

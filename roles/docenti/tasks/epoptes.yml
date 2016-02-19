@@ -9,11 +9,9 @@
 
 - name: Stopping epoptes SysV daemon
   shell: /etc/init.d/epoptes stop
-  become: yes
 
 - name: Disabling sysv start
   shell: /usr/sbin/update-rc.d -f epoptes remove
-  become: yes
 
 - name: Installing upstart service
   copy:
@@ -25,4 +23,3 @@
 
 - name: Starting epoptes from upstart
   shell: /sbin/start epoptes
-  become: yes

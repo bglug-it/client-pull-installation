@@ -17,12 +17,10 @@
 
 - name: SAMBA restart
   shell: restart smbd
-  become: yes
   when: cfg_samba|changed
 
 - name: Winbind restart
   shell: restart winbind
-  become: yes
   when: cfg_samba|changed
 
 - name: Creating home base

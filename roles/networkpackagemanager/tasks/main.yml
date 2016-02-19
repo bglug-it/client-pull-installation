@@ -9,7 +9,6 @@
   apt:
     name: '{{ item }}'
     state: present
-  become: yes
   with_items: "{{ ansible_local.noderole.addpkg }}"
   when: ansible_local.noderole.addpkg is defined and ansible_local.noderole.addpkg|join(' ')|trim != ''
 
@@ -23,4 +22,3 @@
 
 - name: Updating local hash for packages
   shell: 'rm -f {{ ansible_local.checksum.pkgver_file }} && echo "{{ ansible_local.checksum.pkgver }}" > {{ ansible_local.checksum.pkgver_file }}'
-  become: yes

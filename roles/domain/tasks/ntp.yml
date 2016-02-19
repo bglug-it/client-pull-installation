@@ -5,7 +5,6 @@
   apt:
     name: ntp
     state: present
-  become: yes
 
 - name: Configuring NTP
   template:
@@ -27,5 +26,4 @@
 
 - name: Restarting NTP service
   shell: service ntp restart
-  become: yes
   when: cfg_ntp|changed

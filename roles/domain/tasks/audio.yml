@@ -11,7 +11,6 @@
   service:
     name: pulseaudio
     state: started
-  become: yes
 
 - name: "Configuring client options"
   lineinfile:
@@ -24,7 +23,6 @@
 
 - name: Disabling pulseaudio startup on lightdm
   shell: chmod -x /usr/bin/start-pulseaudio-x11
-  become: yes
 
 - name: Adding pulseaudio fixing script at reboot.
   lineinfile:
