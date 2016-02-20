@@ -6,6 +6,9 @@
   apt: update_cache=yes cache_valid_time=180
   become: yes
 
+- name: Debug
+  debug: var=ansible_local.noderole.addpkg
+
 - name: Installing packages for specific role from NetworkPackageManager
   apt:
     name: '{{ item }}'
