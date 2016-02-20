@@ -5,9 +5,6 @@
   apt:
     name: tightvncserver
     state: present
-  become: yes
-  environment:
-    DEBIAN_FRONTEND: noninteractive
 
 - name: Configuring a password for tightvnc
   copy:
