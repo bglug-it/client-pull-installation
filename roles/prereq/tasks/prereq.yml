@@ -6,6 +6,7 @@
     dest: /etc/domain.yml
     owner: root
     mode: 0644
+    force: yes
 
 - name: Creating ansible facts directory
   file:
