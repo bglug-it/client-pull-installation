@@ -7,10 +7,13 @@
     replace: 'start on runlevel [2345]'
     dest: /etc/init/pulseaudio.conf
 
+- name: "Checking if pulseaudio is started"
+  shell: /sbin/status pulseaudio
+  register: pulseaudio_status
+
 - name: Starting pulseaudio service
-  service:
-    name: pulseaudio
-    state: started
+  shell: /usr/sbin/service pulseaudio start
+  when: pulseaudio_status.stdout.find("start/running") == -1
 
 - name: "Configuring client options"
   lineinfile:
