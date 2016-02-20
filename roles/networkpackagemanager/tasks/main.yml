@@ -2,4 +2,3 @@
 # Doing npm checkings unless disable_npm is set in domain.yml
 
 - include: npm.yml
-  when: ansible_local.domain.disable_npm is not defined or not ansible_local.domain.disable_npm|bool
