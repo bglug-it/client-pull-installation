@@ -21,5 +21,10 @@
     group: root
     mode: 0644
 
+- name: Verify epoptes status
+  shell: /sbin/status epoptes
+  register: epoptes_status
+
 - name: Starting epoptes from upstart
   shell: /sbin/start epoptes
+  when:  epoptes_status.stdout.find("start/running") == -1
