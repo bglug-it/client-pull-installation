@@ -16,11 +16,11 @@
     replace: '@{HOMEDIRS}=/home/ /home/{{ ansible_local.domain.domainshort }}/'
 
 - name: SAMBA restart
-  shell: restart smbd
+  shell: /usr/sbin/service samba restart
   when: cfg_samba|changed
 
 - name: Winbind restart
-  shell: restart winbind
+  shell: /usr/sbin/service winbind restart
   when: cfg_samba|changed
 
 - name: Creating home base
