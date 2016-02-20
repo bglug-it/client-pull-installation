@@ -7,7 +7,6 @@
   with_items:
     - unattended-upgrades
     - update-notifier-common
-  become: yes
 
 - name: Configuring unattended upgrades from file
   copy:

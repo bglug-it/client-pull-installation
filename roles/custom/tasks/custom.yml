@@ -3,13 +3,11 @@
 - name: Installing plymouth theme
   apt:
     name: plymouth-theme-edubuntu-bglug
-    state: present
+    state: latest
     force: yes
-  become: yes
 
 - name: Installing lightdm wallpaper
   apt:
     name: bglug-artwork
-    state: present
+    state: latest
     force: yes
-  become: yes

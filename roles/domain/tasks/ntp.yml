@@ -5,7 +5,6 @@
   apt:
     name: ntp
     state: present
-  become: yes
 
 - name: Configuring NTP
   template:

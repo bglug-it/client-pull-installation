@@ -5,7 +5,6 @@
   apt:
     name: libpam-mount
     state: present
-  become: yes
 
 - name: Configuring pam_mount
   template:
