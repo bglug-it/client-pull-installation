@@ -9,6 +9,7 @@
     - { role: networkpackagemanager, when: '(ansible_local.domain.disable_npm is not defined or ansible_local.domain.disable_npm|bool == False) and ansible_local.checksum.needs_pkg_run|bool' }
     - { role: init, when: 'ansible_local.checksum.needs_repo_run | bool' }
     - { role: custom, when: 'ansible_local.checksum.needs_repo_run | bool' }
+    - { role: remote-control, when: 'ansible_local.checksum.needs_repo_run | bool' }
     - { role: domain, when: 'ansible_local.checksum.needs_repo_run | bool' }
   environment:
       DEBIAN_FRONTEND: noninteractive

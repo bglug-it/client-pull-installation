@@ -1,0 +1,29 @@
+---
+# Installing a VNC Server for remote monitoring.
+
+- name: Install vnc server
+  apt:
+    name: tightvncserver
+    state: present
+  become: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Configuring a password for tightvnc
+  copy:
+    src: vncpasswd
+    dest: /etc/vncpasswd
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Configuring lightdm for tightvnc server
+  copy:
+    src: 60-vnc.conf
+    dest: /usr/share/lightdm/lightdm.conf.d/60-vnc.conf
+    owner: root
+    group: root
+    mode: 0644
+
+# Not restarting lightdm: the user may be using the session.
+# tightvnc will be used in next session.
