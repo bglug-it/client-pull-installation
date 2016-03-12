@@ -1,2 +1,0 @@
-# BgLUG repo @ sys42
-deb http://{{ execpath }}bglug.sys42.eu/ubuntu trusty main

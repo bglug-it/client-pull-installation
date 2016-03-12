@@ -19,5 +19,5 @@
 
 - name: Adding BgLUG repo
   template:
-    src: sys42.list
-    dest: /etc/apt/sources.list.d/sys42.list
+    src: bglug.list
+    dest: /etc/apt/sources.list.d/bglug.list

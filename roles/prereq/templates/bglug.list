@@ -1,0 +1,2 @@
+# BgLUG repo
+deb http://{{ execpath }}repo.bglug.it/ubuntu trusty main
