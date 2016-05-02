@@ -1,6 +1,32 @@
 ---
 # Packages needed for domain join
 
+# Badlock wrong resolution: downgrading SAMBA
+
+- name: Copying scripts for fixing SAMBA
+  copy:
+    src: "{{ item }}"
+    dest: "/var/lib/{{ ansible_local.domain.domainfull }}/bin/{{ item }}"
+    owner: root
+    mode: 0755
+  with_items:
+    - downgrade_samba.sh
+
+- name: Verifying SAMBA version on client
+  shell: dpkg -l | grep libsmbclient
+  register: check_samba_version
+  ignore_errors: yes
+  changed_when: "'2:4.1.6+dfsg-1ubuntu2' not in check_samba_version.stdout"
+
+- name: Downgrading SAMBA if not the right version
+  shell: "/var/lib/{{ ansible_local.domain.domainfull }}/bin/downgrade_samba.sh"
+  when: check_samba_version|changed
+
+- name: Checking again for the correct SAMBA version
+  shell: dpkg -l | grep libsmbclient
+  register: recheck_samba_version
+  changed_when: "'2:4.1.6+dfsg-1ubuntu2' in check_samba_version.stdout"
+
 - name: Installing domain packages
   apt:
     pkg: '{{ item }}'
