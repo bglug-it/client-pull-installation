@@ -9,6 +9,7 @@
 
 - name: Stopping epoptes SysV daemon
   shell: /etc/init.d/epoptes stop
+  ignore_errors: yes
 
 - name: Disabling sysv start
   shell: /usr/sbin/update-rc.d -f epoptes remove
