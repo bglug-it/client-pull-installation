@@ -9,3 +9,6 @@
 
 - include: policykit-1.yml
   tags: policykit
+
+- include: disable-upgrade-notifications.yml
+  tags: disable-upgrade-notifications
