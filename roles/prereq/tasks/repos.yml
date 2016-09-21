@@ -2,22 +2,19 @@
 # Fixing all the stuff around repositories.
 
 # Provide a clean and ordered sources.list
-- name: Replace sources.list with a clean one.
-  template:
-    src: sources.list
+- name: Change main repositories
+  get_url:
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/sources.list"
     dest: /etc/apt/sources.list
 
-- name: Adding Ansible repo
-  template:
-    src: ansible.list
-    dest: /etc/apt/sources.list.d/ansible.list
+- name: Adding additional repositories
+  get_url:
+    src: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
+    dest: "/etc/apt/sources.list.d/{{ item }}"
+  with_items:
+    - ansible-ansible-trusty.list
+    - libreoffice-ppa-trusty.list
+    - bglug-trusty.list
 
-- name: Adding LibreOffice repo
-  template:
-    src: libreoffice.list
-    dest: /etc/apt/sources.list.d/libreoffice.list 
-
-- name: Adding BgLUG repo
-  template:
-    src: bglug.list
-    dest: /etc/apt/sources.list.d/bglug.list
+- name: Updating package database
+  apt: update_cache=yes

@@ -5,11 +5,6 @@
 
 # Requires fact execpath, already set by prereq role.
 
-- include: apt-sources.yml
-  tags:
-    - base
-    - apt-sources
-
 - include: virtualbox-guest-addons.yml
   tags:
     - base
