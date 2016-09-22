@@ -9,7 +9,7 @@
 
 - name: Adding additional repositories
   get_url:
-    src: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
+    url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
     dest: "/etc/apt/sources.list.d/{{ item }}"
   with_items:
     - ansible-ansible-trusty.list
