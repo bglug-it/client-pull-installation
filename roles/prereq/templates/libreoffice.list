@@ -1,2 +1,0 @@
-## LibreOffice Official PPA
-deb http://{{ execpath }}ppa.launchpad.net/libreoffice/libreoffice-5-0/ubuntu trusty main
