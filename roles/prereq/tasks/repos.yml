@@ -6,11 +6,13 @@
   get_url:
     url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/sources.list"
     dest: /etc/apt/sources.list
+    force: yes
 
 - name: Adding additional repositories
   get_url:
     url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
     dest: "/etc/apt/sources.list.d/{{ item }}"
+    force: yes
   with_items:
     - ansible-ansible-trusty.list
     - libreoffice-ppa-trusty.list
