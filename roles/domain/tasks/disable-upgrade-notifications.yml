@@ -15,3 +15,4 @@
 - name: Removing notifications for system upgrade
   shell: mv /usr/share/upstart/sessions/update-notifier-release.conf /usr/share/upstart/sessions/update-notifier-release.conf.disabled
   when: update_notifier_release_stat|success
+  ignore_errors: yes
