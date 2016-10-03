@@ -1,11 +1,13 @@
 ---
 # Manages reactivation of pulseaudio as system daemon
 
-- name: "Allowing pulseaudio to run at startup"
-  replace:
-    regexp: '^#start on runlevel.*$'
-    replace: 'start on runlevel [2345]'
+- name: "Changing pulseaudio upstart script"
+  template:
+    src: pulseaudio.conf
     dest: /etc/init/pulseaudio.conf
+    owner: root
+    group: root
+    mode: 0644
 
 - name: "Checking if pulseaudio is started"
   shell: /sbin/status pulseaudio
@@ -27,9 +29,9 @@
 - name: Disabling pulseaudio startup on lightdm
   shell: chmod -x /usr/bin/start-pulseaudio-x11
 
-- name: Adding pulseaudio fixing script at reboot.
-  lineinfile:
-    line: '@reboot root curl -sSL http://{{ ansible_local.domain.serverfqdn }}/ks/preseed/pulseaudio-perms.sh | bash >/dev/null 2>&1'
-    dest: /etc/cron.d/pulseaudio-perms
-    create: yes
-    state: present
+#- name: Adding pulseaudio fixing script at reboot.
+#  lineinfile:
+#    line: '@reboot root curl -sSL http://{{ ansible_local.domain.serverfqdn }}/ks/preseed/pulseaudio-perms.sh | bash >/dev/null 2>&1'
+#    dest: /etc/cron.d/pulseaudio-perms
+#    create: yes
+#    state: present
