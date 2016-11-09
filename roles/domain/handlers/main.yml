@@ -1,6 +1,6 @@
 ---
 
 - name: reboot
-  shell: shutdown -r now "Reboot by Ansible."
+  shell: /sbin/shutdown -r now "Reboot by Ansible."
   async: 0
   poll: 0
