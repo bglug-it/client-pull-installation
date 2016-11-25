@@ -10,3 +10,9 @@
   tags:
     - prereq
     - repos
+
+- include: fixes.yml
+  tags:
+    - prereq
+    - fixes
+  when: ansible_local.domain.apply_fixes is defined
