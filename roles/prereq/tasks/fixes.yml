@@ -1,0 +1,18 @@
+---
+# Permits to apply per-site signed fixes automatically
+#
+# Prepare a script file, then crypt it with the Domain Administrator password:
+# gpg -r info@bglug.it --symmetric --encrypt script.sh > script.sh.gpg
+#
+# Put the script within the server directory /var/lib/nethserver/ibay/ks/fixes
+#
+# List the file within domain.yml:
+# apply_fixes:
+#  - script.sh.gpg
+#
+# Please see roles/prereq/files/samba-downgrade_20161124.sh as a template.
+#
+
+- name: Applying local signed fixes
+  shell: "/usr/bin/curl -sSL http://{{ ansible_local.domain.serverfqdn }}/ks/fixes/{{ item }} | /usr/bin/gpg --passphrase {{ domainadminpasswd }} --decrypt | sudo /bin/bash"
+  with_items: "{{ ansible_local.domain.apply_fixes|default([]) }}"
