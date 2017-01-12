@@ -18,14 +18,14 @@
   ignore_errors: yes
   changed_when: "'2:4.1.6+dfsg-1ubuntu2' not in check_samba_version.stdout"
 
-#- name: Downgrading SAMBA if not the right version
-#  shell: "/var/lib/{{ ansible_local.domain.domainfull }}/bin/downgrade_samba.sh"
-#  when: check_samba_version|changed
-#
-#- name: Checking again for the correct SAMBA version
-#  shell: dpkg -l | grep libsmbclient
-#  register: recheck_samba_version
-#  changed_when: "'2:4.1.6+dfsg-1ubuntu2' in check_samba_version.stdout"
+- name: Downgrading SAMBA if not the right version
+  shell: "/var/lib/{{ ansible_local.domain.domainfull }}/bin/downgrade_samba.sh"
+  when: check_samba_version|changed
+
+- name: Checking again for the correct SAMBA version
+  shell: dpkg -l | grep libsmbclient
+  register: recheck_samba_version
+  changed_when: "'2:4.1.6+dfsg-1ubuntu2' in check_samba_version.stdout"
 
 - name: Installing domain packages
   apt:
