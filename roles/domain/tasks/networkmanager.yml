@@ -1,0 +1,19 @@
+---
+# Fixing NetworkManager issues.
+
+- name: Ensuring first NIC will never be disabled again
+  lineinfile:
+    line: "{{ item }}"
+    state: present
+    dest: /etc/network/interfaces
+    insertafter: EOF
+  with_items:
+    - " "
+    - "auto eth0"
+    - "iface eth0 inet dhcp"
+
+# Hiding icon for any sessions
+
+- name: Disabling NetworkManager from popping up in sessions
+  shell: mv /etc/xdg/autostart/nm-applet.desktop /etc/xdg/autostart/nm-applet.desktop.disabled
+  ignore_errors: yes

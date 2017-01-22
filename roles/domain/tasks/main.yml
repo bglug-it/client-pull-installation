@@ -1,6 +1,11 @@
 ---
 # Domain configurations
 
+- include: networkmanager.yml
+  tags:
+    - domain
+    - networkmanager
+
 - include: ntp.yml
   tags:
     - domain
