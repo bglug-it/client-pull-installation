@@ -1,0 +1,9 @@
+---
+# Final tasks.
+
+- name: Ensuring APT stack is healthy
+  shell: dpkg --configure -a && apt-get install -f
+
+# Correctly managing ansible-pull runs.
+- name: Updating local version for repo
+  shell: 'rm -f {{ ansible_local.checksum.repover_file }} && echo "{{ ansible_local.checksum.repover }}" > {{ ansible_local.checksum.repover_file }}'

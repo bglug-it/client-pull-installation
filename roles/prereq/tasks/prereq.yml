@@ -1,5 +1,8 @@
 ---
 
+- name: Fixing APT issues, every time.
+  shell: dpkg --configure -a && apt-get install -f
+
 - name: Domain settings download
   get_url:
     url: "http://{{ ansible_default_ipv4.gateway }}:3000/domain"
