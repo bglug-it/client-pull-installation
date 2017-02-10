@@ -8,6 +8,33 @@
     dest: /etc/apt/sources.list
     force: yes
 
+- name: Checking for libreoffice PPA GPG key
+  shell: apt-key list | grep -q 1378B444
+  register: check_gpg_libreoffice
+  ignore_errors: yes
+
+- name: Installing libreoffice PPA GPG key
+  shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 1378B444
+  when: check_gpg_libreoffice|failed
+
+- name: Checking for ansible PPA GPG key
+  shell: apt-key list | grep -q 7BB9C367
+  register: check_gpg_ansible
+  ignore_errors: yes
+
+- name: Installing ansible PPA GPG key
+  shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 7BB9C367
+  when: check_gpg_ansible|failed
+
+- name: Checking for geogebra GPG key
+  shell: apt-key list | grep -q 83A736CF
+  register: check_gpg_geogebra
+  ignore_errors: yes
+
+- name: Installing geogebra GPG key
+  shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 83A736CF
+  when: check_gpg_geogebra|failed
+
 - name: Adding additional repositories
   get_url:
     url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
@@ -16,6 +43,7 @@
   with_items:
     - ansible-ansible-trusty.list
     - libreoffice-ppa-trusty.list
+    - geogebra-stable.list
     - bglug-trusty.list
 
 - name: Updating package database
