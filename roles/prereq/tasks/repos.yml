@@ -26,6 +26,15 @@
   shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 7BB9C367
   when: check_gpg_ansible|failed
 
+- name: Checking for epoptes PPA GPG key
+  shell: apt-key list | grep -q 0350B375
+  register: check_gpg_epoptes
+  ignore_errors: yes
+
+- name: Installing epoptes PPA GPG key
+  shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 0350B375
+  when: check_gpg_epoptes|failed
+
 - name: Checking for geogebra GPG key
   shell: apt-key list | grep -q 83A736CF
   register: check_gpg_geogebra
@@ -35,6 +44,15 @@
   shell: apt-key adv --keyserver keyserver.ubuntu.com --recv 83A736CF
   when: check_gpg_geogebra|failed
 
+- name: Removing old repositories (if present)
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - ansible.list
+    - geogebra.list
+    - libreoffice.list
+
 - name: Adding additional repositories
   get_url:
     url: "http://{{ ansible_local.domain.serverfqdn }}/ks/repoconfig/{{ item }}"
@@ -43,6 +61,7 @@
   with_items:
     - ansible-ansible-trusty.list
     - libreoffice-ppa-trusty.list
+    - epoptes-ppa-trusty.list
     - geogebra-stable.list
     - bglug-trusty.list
 
