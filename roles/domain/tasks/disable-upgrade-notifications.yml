@@ -5,7 +5,7 @@
     path: /usr/share/upstart/sessions/update-notifier-release.conf
   register: update_notifier_release_stat
   ignore_errors: yes
-
-- name: Removing notifications for system upgrade
-  shell: mv /usr/share/upstart/sessions/update-notifier-release.conf /usr/share/upstart/sessions/update-notifier-release.conf.disabled
-  when: update_notifier_release_stat|success
+  #
+  #- name: Removing notifications for system upgrade
+  #  shell: mv /usr/share/upstart/sessions/update-notifier-release.conf /usr/share/upstart/sessions/update-notifier-release.conf.disabled
+  #  when: update_notifier_release_stat|success

@@ -1,16 +1,16 @@
 ---
 # Fixing NetworkManager issues.
 
-- name: Ensuring first NIC will never be disabled again
-  lineinfile:
-    line: "{{ item }}"
-    state: present
-    dest: /etc/network/interfaces
-    insertafter: EOF
-  with_items:
-    - " "
-    - "auto eth0"
-    - "iface eth0 inet dhcp"
+#- name: Ensuring first NIC will never be disabled again
+#  lineinfile:
+#    line: "{{ item }}"
+#    state: present
+#    dest: /etc/network/interfaces
+#    insertafter: EOF
+#  with_items:
+#    - " "
+#    - "auto eth0"
+#    - "iface eth0 inet dhcp"
 
 # Hiding icon for any sessions
 
