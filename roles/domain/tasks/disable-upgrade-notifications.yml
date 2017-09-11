@@ -1,12 +1,11 @@
 ---
-- name: Removing upgrade-notification from /etc
-  lineinfile:
-    dest: /etc/update-manager/release-upgrades
-    line: "Prompt=never"
-    regexp: '^Prompt='
-    state: present
+
+- name: Checking for upgrade-notification configuration
+  stat:
+    path: /usr/share/upstart/sessions/update-notifier-release.conf
+  register: update_notifier_release_stat
+  ignore_errors: yes
 
 - name: Removing notifications for system upgrade
-  shell: >
-    test -f /usr/share/upstart/sessions/update-notifier-release.conf && mv /usr/share/upstart/sessions/update-notifier-release.conf /usr/share/upstart/sessions/update-notifier-release.conf.disabled
-  ignore_errors: yes
+  shell: mv /usr/share/upstart/sessions/update-notifier-release.conf /usr/share/upstart/sessions/update-notifier-release.conf.disabled
+  when: update_notifier_release_stat|success
