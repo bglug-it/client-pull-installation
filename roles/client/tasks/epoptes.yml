@@ -19,6 +19,12 @@
     state: absent
   when: get_epo_srv_name|changed
 
+- name: Ensuring epoptes-client is installed
+  apt:
+    name: epoptes-client
+    state: present
+  when: get_epo_srv_name|changed
+
 - name: Configuring the client
   replace:
     dest: /etc/default/epoptes-client
