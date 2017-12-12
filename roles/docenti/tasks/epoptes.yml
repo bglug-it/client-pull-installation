@@ -1,6 +1,11 @@
 ---
 # Managing Epoptes installation on 'docenti' role.
 
+- name: Ensuring epoptes package has been installed
+  apt:
+    name: epoptes
+    state: present
+
 - name: Configuring the Epoptes server
   lineinfile:
     dest: /etc/default/epoptes
@@ -29,3 +34,19 @@
 - name: Starting epoptes from upstart
   shell: /sbin/start epoptes
   when:  epoptes_status.stdout.find("start/running") == -1
+
+# Disabling ufw as per issue #12
+- name: Disabling ufw by override
+  lineinfile:
+    path: /etc/init/ufw.override
+    line: "manual"
+    state: present
+    create: yes
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Stopping ufw
+  service:
+    name: ufw
+    state: stopped
